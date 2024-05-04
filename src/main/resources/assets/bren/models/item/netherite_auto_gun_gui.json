@@ -1,0 +1,6 @@
+{
+  "parent": "bren:item/assault_gun_handheld",
+  "textures": {
+    "layer0": "bren:item/netherite_auto_gun_gui"
+  }
+}

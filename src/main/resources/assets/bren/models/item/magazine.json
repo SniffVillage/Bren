@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "bren:item/empty_magazine"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "is_full": 1
+      },
+      "model": "bren:item/magazine_full"
+    }
+  ]
+}

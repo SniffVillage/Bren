@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "M": {
+      "item": "bren:auto_loader_contraption"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "T": {
+      "item": "bren:metal_tube"
+    },
+    "F": {
+      "item": "minecraft:iron_block"
+    },
+    "P": {
+      "tag": "minecraft:logs"
+    }
+  },
+  "pattern": [
+    "TP ",
+    " FM",
+    " IP"
+  ],
+  "result": {
+    "item": "bren:auto_gun"
+  },
+  "show_notification": true
+}

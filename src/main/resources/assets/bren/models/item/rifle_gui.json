@@ -1,0 +1,6 @@
+{
+  "parent": "bren:item/rifle_gun_handheld",
+  "textures": {
+    "layer0": "bren:item/rifle_gui"
+  }
+}

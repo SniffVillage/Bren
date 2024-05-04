@@ -1,0 +1,40 @@
+{
+  "item.bren.machine_gun": "Machine Gun",
+  "item.bren.auto_gun": "Auto-Gun",
+  "item.bren.rifle": "Rifle",
+  "item.bren.shotgun": "Shotgun",
+  "item.bren.netherite_machine_gun": "Netherite Machine Gun",
+  "item.bren.netherite_auto_gun": "Netherite Auto-Gun",
+  "item.bren.netherite_rifle": "Netherite Rifle",
+  "item.bren.netherite_shotgun": "Netherite Shotgun",
+
+  "item.bren.magazine": "Magazine",
+  "item.bren.short_magazine": "Short Magazine",
+  "item.bren.clothed_magazine": "Clothed Magazine",
+  "item.bren.bullet": "Bullet",
+  "item.bren.shell": "Shell",
+  "item.bren.metal_tube": "Metal Tube",
+  "item.bren.auto_loader_contraption": "AutoLoader Contraption",
+
+  "enchantment.bren.silenced": "Silenced",
+  "enchantment.bren.overflow": "Overflow",
+  "enchantment.bren.autofill": "Autofill",
+
+  "desc.bren.item.machine_gun.content": "Rounds",
+  "desc.bren.item.machine_gun.range_damage": "Range Damage",
+  "desc.bren.item.magazine.content": "Ammo",
+
+  "block.bren.workbench": "Workbench",
+
+  "entity.minecraft.villager.gunsmith": "Gunsmith",
+
+  "bren.item.shoot_silenced": "Silenced gunfire",
+  "bren.item.shoot": "Gunfire",
+  "bren.item.machine_gun.distant_shoot": "Distant gunfire",
+  "bren.item.machine_gun.magazine_insert": "Magazine inserted",
+  "bren.item.machine_gun.magazine_remove": "Magazine removed",
+  "bren.item.shell_insert": "Shell inserted",
+  "bren.item.rack": "Shotgun racked",
+  "bren.particle.casing.bounce": "Casing bouncing",
+  "bren.entity.villager.work_gunsmith": "Gunsmith works"
+}

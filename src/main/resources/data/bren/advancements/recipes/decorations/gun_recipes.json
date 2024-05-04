@@ -1,0 +1,31 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_auto_loader_contraption": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "bren:auto_loader_contraption"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_auto_loader_contraption"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "bren:auto_gun",
+      "bren:machine_gun",
+      "bren:rifle",
+      "bren:shotgun"
+    ]
+  },
+  "sends_telemetry_event": false
+}

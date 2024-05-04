@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "M": {
+      "item": "minecraft:gold_ingot"
+    },
+    "I": {
+      "item": "minecraft:copper_ingot"
+    },
+    "G": {
+      "item": "minecraft:gunpowder"
+    }
+  },
+  "pattern": [
+    " MI",
+    "MGM",
+    " M "
+  ],
+  "result": {
+    "item": "bren:bullet",
+    "count": 12
+  },
+  "show_notification": true
+}

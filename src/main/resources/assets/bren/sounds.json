@@ -1,0 +1,92 @@
+{
+  "item.machine_gun.shoot": {
+    "subtitle": "bren.item.shoot",
+    "sounds": [
+      "bren:machine_gun_shot"
+    ]
+  },
+  "item.auto_gun.shoot": {
+    "subtitle": "bren.item.shoot",
+    "sounds": [
+      "bren:auto_gun_shot"
+    ]
+  },
+  "item.rifle.shoot": {
+    "subtitle": "bren.item.shoot",
+    "sounds": [
+      "bren:rifle_shot"
+    ]
+  },
+  "item.shotgun.shoot": {
+    "subtitle": "bren.item.shoot",
+    "sounds": [
+      "bren:shotgun_shot"
+    ]
+  },
+  "item.shotgun.shell_insert": {
+    "subtitle": "bren.item.shell_insert",
+    "sounds": [
+      "bren:shell_insert_0",
+      "bren:shell_insert_1"
+    ]
+  },
+  "item.shotgun.rack": {
+    "subtitle": "bren.item.rack",
+    "sounds": [
+      "bren:shotgun_rack"
+    ]
+  },
+  "item.machine_gun.shoot_silenced": {
+    "subtitle": "bren.item.shoot_silenced",
+    "sounds": [
+      "bren:silenced_machine_gun_shot"
+    ]
+  },
+  "item.auto_gun.shoot_silenced": {
+    "subtitle": "bren.item.shoot_silenced",
+    "sounds": [
+      "bren:silenced_auto_gun_shot"
+    ]
+  },
+  "item.rifle.shoot_silenced": {
+    "subtitle": "bren.item.shoot_silenced",
+    "sounds": [
+      "bren:silenced_rifle_shot"
+    ]
+  },
+  "item.machine_gun.distant_shoot": {
+    "subtitle": "bren.item.machine_gun.distant_shoot",
+    "sounds": [
+      "bren:distant_machine_gun_shot_0",
+      "bren:distant_machine_gun_shot_1"
+    ]
+  },
+  "item.machine_gun.magazine_insert": {
+    "subtitle": "bren.item.machine_gun.magazine_insert",
+    "sounds": [
+      "bren:machine_gun_magazine_insert"
+    ]
+  },
+  "item.machine_gun.magazine_remove": {
+    "subtitle": "bren.item.machine_gun.magazine_remove",
+    "sounds": [
+      "bren:machine_gun_magazine_remove"
+    ]
+  },
+  "entity.villager.work_gunsmith": {
+    "subtitle": "bren.entity.villager.work_gunsmith",
+    "sounds": [
+      "bren:gunsmith_work_0",
+      "bren:gunsmith_work_1",
+      "bren:gunsmith_work_2"
+    ]
+  },
+  "particle.casing.bounce": {
+    "subtitle": "bren.particle.casing.bounce",
+    "sounds": [
+      "bren:casing_bounce_0",
+      "bren:casing_bounce_1",
+      "bren:casing_bounce_2"
+    ]
+  }
+}

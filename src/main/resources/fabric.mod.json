@@ -1,0 +1,36 @@
+{
+	"schemaVersion": 1,
+	"id": "bren",
+	"version": "${version}",
+	"name": "bren",
+	"description": "EVER WANTED TO START A WAR!! Or just kill mobs better... ANYWAY THIS IS THE MOD FOR YOU!",
+	"authors": [
+		"Sniffiandros!"
+	],
+	"contact": {
+		"homepage": "https://legacy.curseforge.com/minecraft/mc-mods/bren"
+	},
+	"license": "ARR",
+	"icon": "assets/bren/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"nl.sniffiandros.bren.common.Bren"
+		],
+		"client": [
+			"nl.sniffiandros.bren.client.ClientBren"
+		]
+	},
+	"mixins": [
+		"bren.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.0",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

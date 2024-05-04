@@ -1,0 +1,6 @@
+{
+  "parent": "bren:item/gun_handheld",
+  "textures": {
+    "layer0": "bren:item/netherite_machine_gun_gui"
+  }
+}

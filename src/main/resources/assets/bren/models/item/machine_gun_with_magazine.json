@@ -1,0 +1,6 @@
+{
+  "parent": "bren:item/gun_handheld",
+  "textures": {
+    "layer0": "bren:item/machine_gun_with_magazine"
+  }
+}

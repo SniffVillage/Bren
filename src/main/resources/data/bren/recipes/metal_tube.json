@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "T": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "TTT",
+    "   ",
+    "TTT"
+  ],
+  "result": {
+    "item": "bren:metal_tube",
+    "count": 2
+  },
+  "show_notification": true
+}

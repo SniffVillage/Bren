@@ -1,0 +1,22 @@
+{
+  "parent": "bren:item/gun_handheld",
+  "textures": {
+    "layer0": "bren:item/netherite_machine_gun"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "has_magazine": 1,
+        "has_colorable_magazine": 0
+      },
+      "model": "bren:item/netherite_machine_gun_with_magazine"
+    },
+    {
+      "predicate": {
+        "has_magazine": 1,
+        "has_colorable_magazine": 1
+      },
+      "model": "bren:item/netherite_machine_gun_with_clothed_magazine"
+    }
+  ]
+}

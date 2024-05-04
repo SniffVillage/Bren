@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "M": {
+      "item": "bren:auto_loader_contraption"
+    },
+    "T": {
+      "item": "bren:metal_tube"
+    },
+    "F": {
+      "item": "minecraft:iron_block"
+    },
+    "P": {
+      "tag": "minecraft:logs"
+    }
+  },
+  "pattern": [
+    "T  ",
+    "TFM",
+    " PP"
+  ],
+  "result": {
+    "item": "bren:shotgun"
+  },
+  "show_notification": true
+}

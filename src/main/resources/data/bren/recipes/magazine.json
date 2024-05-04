@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "M": {
+      "item": "minecraft:bowl"
+    },
+    "I": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "pattern": [
+    "IMI",
+    " I "
+  ],
+  "result": {
+    "item": "bren:magazine"
+  },
+  "show_notification": true
+}

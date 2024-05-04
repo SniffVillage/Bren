@@ -1,0 +1,7 @@
+{
+  "parent": "bren:item/assault_gun_handheld",
+  "textures": {
+    "layer0": "bren:item/auto_gun_with_magazine_cloth_gui",
+    "layer1": "bren:item/auto_gun_with_clothed_magazine_gui"
+  }
+}
