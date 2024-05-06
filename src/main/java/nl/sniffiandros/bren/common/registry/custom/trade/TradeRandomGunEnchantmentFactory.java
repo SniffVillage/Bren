@@ -24,7 +24,8 @@ public class TradeRandomGunEnchantmentFactory implements TradeOffers.Factory {
     private static final Set<Enchantment> ENCHANTS = ImmutableList.of(
             EnchantmentReg.AUTOFILL,
             EnchantmentReg.OVERFLOW,
-            EnchantmentReg.SILENCED
+            EnchantmentReg.SILENCED,
+            EnchantmentReg.STEADY_HANDS
     ).stream().collect(ImmutableSet.toImmutableSet());
 
     private final int price;

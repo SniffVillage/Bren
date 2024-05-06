@@ -13,6 +13,7 @@
     "client.BipedEntityModelMixin",
     "client.DrawContextMixin",
     "client.ItemRendererMixin",
-    "client.LivingEntityRendererMixin"
+    "client.LivingEntityRendererMixin",
+    "client.MinecraftClientMixin"
   ]
 }

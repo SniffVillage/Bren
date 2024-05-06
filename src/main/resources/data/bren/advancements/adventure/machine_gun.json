@@ -1,0 +1,39 @@
+{
+  "parent": "bren:adventure/auto_loader_contraption",
+  "criteria": {
+    "machine_gun": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "bren:machine_gun",
+              "bren:netherite_machine_gun"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.bren.adventure.machine_gun.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "bren:machine_gun"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.bren.adventure.machine_gun.title"
+    }
+  },
+  "requirements": [
+    [
+      "machine_gun"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

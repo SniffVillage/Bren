@@ -105,7 +105,7 @@ public class GunUtils {
 
         BulletEntity bullet = new BulletEntity(world, GunItem.rangeDamage(stack), lifespan, entity, fireBullet);
 
-        Vec3d bulletPos = origin.subtract(new Vec3d(0,0.2,0)).subtract(front.multiply(4));
+        Vec3d bulletPos = origin.subtract(new Vec3d(0,0.2,0)).subtract(front.multiply(3.8));
 
         bullet.setPos(bulletPos.getX(), bulletPos.getY() - 0.1, bulletPos.getZ());
         bullet.setVelocity(entity, entity.getPitch() + spread.y, entity.getHeadYaw() + spread.x, 0.0F, 3.5F, 0.0F);
@@ -130,7 +130,7 @@ public class GunUtils {
         world.getPlayers().forEach(player -> {
             double distance = player.squaredDistanceTo(pos);
 
-            if (distance > 6) {
+            if (distance > 60) {
 
                 float volume = (float) Math.max(1.0F - (distance / 400)/100, 0);
 

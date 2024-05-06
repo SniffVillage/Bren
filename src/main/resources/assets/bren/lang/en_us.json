@@ -19,9 +19,12 @@
   "enchantment.bren.silenced": "Silenced",
   "enchantment.bren.overflow": "Overflow",
   "enchantment.bren.autofill": "Autofill",
+  "enchantment.bren.steady_hands": "Steady Hands",
 
   "desc.bren.item.machine_gun.content": "Rounds",
   "desc.bren.item.machine_gun.range_damage": "Range Damage",
+  "desc.bren.item.machine_gun.fire_rate": "Fire Rate",
+  "desc.bren.item.machine_gun.recoil": "Recoil",
   "desc.bren.item.magazine.content": "Ammo",
 
   "block.bren.workbench": "Workbench",
@@ -36,5 +39,28 @@
   "bren.item.shell_insert": "Shell inserted",
   "bren.item.rack": "Shotgun racked",
   "bren.particle.casing.bounce": "Casing bouncing",
-  "bren.entity.villager.work_gunsmith": "Gunsmith works"
+  "bren.entity.villager.work_gunsmith": "Gunsmith works",
+
+  "death.attack.bullet": "%1$s was gunned down by %2$s!",
+
+  "advancements.bren.adventure.auto_loader_contraption.description": "Obtain an AutoLoader Contraption",
+  "advancements.bren.adventure.auto_loader_contraption.title": "A whaaa...?!",
+
+  "advancements.bren.adventure.machine_gun.description": "Obtain an Machine Gun",
+  "advancements.bren.adventure.machine_gun.title": "BRRRT!!",
+
+  "advancements.bren.adventure.auto_gun.description": "Obtain an Auto-Gun",
+  "advancements.bren.adventure.auto_gun.title": "An AK-4... never mind",
+
+  "advancements.bren.adventure.rifle.description": "Obtain an Rifle",
+  "advancements.bren.adventure.rifle.title": "See you in five minutes..",
+
+  "advancements.bren.adventure.shotgun.description": "Obtain an Shotgun",
+  "advancements.bren.adventure.shotgun.title": "BAM!!!",
+
+  "advancements.bren.adventure.warcrimes.description": "Kill a villager with a gun",
+  "advancements.bren.adventure.warcrimes.title": "War crimes",
+
+  "advancements.bren.adventure.long_shooting_machine_gun.description": "Shoot a Machine Gun for a couple of seconds",
+  "advancements.bren.adventure.long_shooting_machine_gun.title": "AHHHHH AH HA HA HA HA HA!!"
 }

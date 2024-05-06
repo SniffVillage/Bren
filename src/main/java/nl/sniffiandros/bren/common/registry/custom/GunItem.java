@@ -1,6 +1,7 @@
 package nl.sniffiandros.bren.common.registry.custom;
 
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.sound.SoundEvent;
@@ -11,7 +12,9 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import nl.sniffiandros.bren.common.Bren;
+import nl.sniffiandros.bren.common.config.MConfig;
 import nl.sniffiandros.bren.common.entity.IGunUser;
+import nl.sniffiandros.bren.common.registry.EnchantmentReg;
 import nl.sniffiandros.bren.common.registry.ParticleReg;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,6 +25,7 @@ public class GunItem extends ToolItem implements Vanishable {
     private final int fireRate;
     private final SoundEvent shootSound;
     private final SoundEvent silentShootSound;
+    private final int recoil;
 
 
     public GunItem(Settings settings, ToolMaterial material, GunProperties gunProperties) {
@@ -30,9 +34,13 @@ public class GunItem extends ToolItem implements Vanishable {
         this.fireRate = gunProperties.fireRate;
         this.shootSound = gunProperties.sound;
         this.silentShootSound = gunProperties.silentSound;
-
+        this.recoil = gunProperties.recoil;
     }
 
+    public float getRecoil(ItemStack stack) {
+        float reduction = ((float) EnchantmentHelper.getLevel(EnchantmentReg.STEADY_HANDS, stack) * 2.6F / 10) + 1;
+        return this.recoil * MConfig.recoilMultiplier.get() / reduction;
+    }
 
 
     public int getMaxCapacity(ItemStack stack) {
@@ -49,7 +57,7 @@ public class GunItem extends ToolItem implements Vanishable {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        Bren.buildToolTip(tooltip, rangeDamage(stack), stack);
+        Bren.buildToolTip(tooltip, stack);
 
         super.appendTooltip(stack, world, tooltip, context);
     }

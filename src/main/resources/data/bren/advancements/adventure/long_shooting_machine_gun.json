@@ -1,0 +1,35 @@
+{
+
+  "parent": "bren:adventure/machine_gun",
+  "criteria": {
+    "shooting": {
+      "trigger": "bren:shooting",
+      "conditions": {
+        "firearm": {
+          "items": [
+            "bren:machine_gun"
+          ]
+        }
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "item": "bren:machine_gun"
+    },
+    "title": {
+      "translate": "advancements.bren.adventure.long_shooting_machine_gun.title"
+    },
+    "description": {
+      "translate": "advancements.bren.adventure.long_shooting_machine_gun.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "requirements": [
+    [
+      "shooting"
+    ]
+  ]
+}

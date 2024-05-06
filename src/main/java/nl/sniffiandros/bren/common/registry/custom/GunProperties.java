@@ -4,6 +4,7 @@ import net.minecraft.sound.SoundEvent;
 
 public class GunProperties {
 
+    public int recoil;
     float rangeDamage;
     int fireRate;
     SoundEvent sound;
@@ -18,6 +19,10 @@ public class GunProperties {
     }
     public GunProperties fireRate(int rate) {
         this.fireRate = rate;
+        return this;
+    }
+    public GunProperties recoil(int recoil) {
+        this.recoil = recoil;
         return this;
     }
     public GunProperties shootSound(SoundEvent sound, SoundEvent silent) {

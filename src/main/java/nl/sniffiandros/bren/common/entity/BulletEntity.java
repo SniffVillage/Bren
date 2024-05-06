@@ -35,6 +35,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import nl.sniffiandros.bren.common.Bren;
 import nl.sniffiandros.bren.common.config.MConfig;
+import nl.sniffiandros.bren.common.registry.DamageTypeReg;
 import nl.sniffiandros.bren.common.registry.ParticleReg;
 
 import java.util.Iterator;
@@ -143,7 +144,7 @@ public class BulletEntity extends ProjectileEntity {
 
         if (entity instanceof LivingEntity livingEntity) {
             livingEntity.timeUntilRegen = 0;
-            DamageSource damageSource = entity.getDamageSources().thrown(this, this.getOwner());
+            DamageSource damageSource = DamageTypeReg.shot(this.getWorld(), this, this.getOwner());
             livingEntity.damage(damageSource, this.damage);
 
             if (this.onFire) {

@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:adventure/trade",
+  "criteria": {
+    "auto_loader_contraption": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "bren:auto_loader_contraption"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.bren.adventure.auto_loader_contraption.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "bren:auto_loader_contraption"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.bren.adventure.auto_loader_contraption.title"
+    }
+  },
+  "requirements": [
+    [
+      "auto_loader_contraption"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

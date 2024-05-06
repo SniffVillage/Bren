@@ -12,11 +12,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.Registries;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import nl.sniffiandros.bren.common.Bren;
 import nl.sniffiandros.bren.common.entity.IGunUser;
+import nl.sniffiandros.bren.common.events.MEvents;
 import nl.sniffiandros.bren.common.registry.custom.GunItem;
 import nl.sniffiandros.bren.common.utils.GunHelper;
 import nl.sniffiandros.bren.common.utils.GunUtils;
@@ -38,6 +41,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IGunUser
     private ItemStack lastGun = ItemStack.EMPTY;
     private ItemStack lastEquippedGun = ItemStack.EMPTY;
     private boolean lastGunLoaded = false;
+    private int shootingDur = 0;
 
     public PlayerEntityMixin(World world, BlockPos pos, float yaw, GameProfile gameProfile) {
         super(EntityType.PLAYER, world);
@@ -49,11 +53,16 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IGunUser
     }
 
     @Override
+    public int shootingDuration() {
+        return this.shootingDur;
+    }
+
+    @Override
     public boolean canShoot(Predicate<ItemStack> predicate) {
         return predicate.test(this.getMainHandStack());
     }
 
-    private void handleShooting() {
+    public void handleShooting() {
 
         ItemCooldownManager c = this.getItemCooldownManager();
 
@@ -75,6 +84,8 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IGunUser
             c.set(this.getMainHandStack().getItem(), fireRate);
 
             PlayerEntity player = (PlayerEntity) (Object) this;
+
+            MEvents.GUN_FIRED_EVENT.invoker().gunFired(player, this.getMainHandStack());
 
             GunUtils.sendAnimationPacket(player);
         }
@@ -143,6 +154,15 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IGunUser
             }
         }
         this.handleShooting();
+
+        if (this.isShooting()) {
+            ++this.shootingDur;
+            if (!this.getWorld().isClient()) {
+                Bren.LONG_SHOOTING.trigger((ServerPlayerEntity) (Object) this, this.getActiveItem());
+            }
+        } else {
+            this.shootingDur = 0;
+        }
     }
 
     private void buildLastGun(NbtCompound itemNbt) {

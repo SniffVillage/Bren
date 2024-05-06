@@ -1,0 +1,39 @@
+{
+  "parent": "bren:adventure/auto_loader_contraption",
+  "criteria": {
+    "auto_gun": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "bren:auto_gun",
+              "bren:netherite_auto_gun"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.bren.adventure.auto_gun.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "bren:auto_gun"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.bren.adventure.auto_gun.title"
+    }
+  },
+  "requirements": [
+    [
+      "auto_gun"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

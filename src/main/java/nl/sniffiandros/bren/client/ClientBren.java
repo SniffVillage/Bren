@@ -17,6 +17,7 @@ import net.minecraft.item.DyeableItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import nl.sniffiandros.bren.client.features.MachineGunBackFeatureRenderer;
+import nl.sniffiandros.bren.client.renderer.RecoilSys;
 import nl.sniffiandros.bren.client.renderer.WeaponTickHolder;
 import nl.sniffiandros.bren.client.renderer.BulletRenderer;
 import nl.sniffiandros.bren.common.Bren;
@@ -56,7 +57,7 @@ public class ClientBren implements ClientModInitializer {
         ModModelPredicateProvider.regModels();
 
         if (MConfig.showAmmoGui.get()) {
-            HudRenderCallback.EVENT.register(new BulletHudOverlay());
+            HudRenderCallback.EVENT.register(new HudOverlay());
         }
 
         List<ModelIdentifier> modelIdentifierList = new ArrayList<>();
@@ -85,10 +86,13 @@ public class ClientBren implements ClientModInitializer {
                 e.register(new MachineGunBackFeatureRenderer(r, c.getItemRenderer()));
             }});
 
+        RecoilSys.regEvents();
+
+        ClientTickEvents.END_CLIENT_TICK.register(WeaponTickHolder::tick);
         ClientTickEvents.END_CLIENT_TICK.register(WeaponTickHolder::tick);
     }
 
-    private static List<ModelIdentifier> registerGUIModels(Identifier id, List<ModelIdentifier> modelIdentifierList, boolean clothed, boolean hasMagazine) {
+    public static List<ModelIdentifier> registerGUIModels(Identifier id, List<ModelIdentifier> modelIdentifierList, boolean clothed, boolean hasMagazine) {
         modelIdentifierList.add(new ModelIdentifier(MODID, id.getPath() + "_" + "gui", "inventory"));
         if (hasMagazine) {
             modelIdentifierList.add(new ModelIdentifier(MODID, id.getPath() + "_with_magazine_" + "gui", "inventory"));

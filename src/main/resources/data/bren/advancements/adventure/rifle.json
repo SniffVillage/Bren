@@ -1,0 +1,39 @@
+{
+  "parent": "minecraft:adventure/root",
+  "criteria": {
+    "rifle": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "bren:rifle",
+              "bren:netherite_rifle"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.bren.adventure.rifle.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "bren:rifle"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.bren.adventure.rifle.title"
+    }
+  },
+  "requirements": [
+    [
+      "rifle"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

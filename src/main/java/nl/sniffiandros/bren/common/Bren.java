@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
@@ -22,10 +23,11 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import nl.sniffiandros.bren.common.config.MConfig;
 import nl.sniffiandros.bren.common.entity.BulletEntity;
-import nl.sniffiandros.bren.common.recipe.ClothedMagazineRecipe;
 import nl.sniffiandros.bren.common.registry.*;
 import nl.sniffiandros.bren.common.registry.custom.GunItem;
 import nl.sniffiandros.bren.common.registry.custom.MagazineItem;
+import nl.sniffiandros.bren.common.registry.custom.criterion.LongShootingCriterion;
+import nl.sniffiandros.bren.common.utils.SMathHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,7 +42,7 @@ public class Bren implements ModInitializer {
 			"bullet"), FabricEntityTypeBuilder.<BulletEntity>create(SpawnGroup.MISC, BulletEntity::new).trackRangeChunks(10)
 			.dimensions(EntityDimensions.fixed(0.35f, 0.35f)).disableSaving().build());
 
-	public static SpecialRecipeSerializer<ClothedMagazineRecipe> CLOTHED_MAG;
+	public static LongShootingCriterion LONG_SHOOTING = Criteria.register(new LongShootingCriterion());
 
 
 	@Override
@@ -96,10 +98,6 @@ public class Bren implements ModInitializer {
 		VillagerRegistry.registerTrades();
 
 		LOGGER.info(String.format("BAM! %s is done loading!", MODID));
-
-		CLOTHED_MAG = Registry.register(Registries.RECIPE_SERIALIZER,
-				new Identifier(MODID, "clothed_mag"),
-				new SpecialRecipeSerializer<>(ClothedMagazineRecipe::new));
 	}
 
 	private static ItemStack mag(MagazineItem m) {
@@ -126,20 +124,35 @@ public class Bren implements ModInitializer {
 		}
 		return fullestMag;
 	}
-	public static void buildToolTip(List<Text> tooltip, float rangeDamage, ItemStack stack) {
+	public static void buildToolTip(List<Text> tooltip, ItemStack stack) {
 
 		if (stack.getItem() instanceof GunItem gunItem) {
 			tooltip.add(Text.literal(gunItem.getContents(stack) + " ").append(Text.translatable(String.format("desc.%s.item.machine_gun.content", Bren.MODID)))
 					.formatted(Formatting.GRAY));
 		}
 
-		double number = Double.parseDouble(String.valueOf(rangeDamage));
-		String str = number % 1 == 0 ? Integer.toString((int) number) : String.valueOf(rangeDamage);
+		GunItem gunItem = (GunItem) stack.getItem();
 
-		tooltip.add(Text.literal(str + " ")
+		float rangeDamage = GunItem.rangeDamage(stack);
+		int fireRate = gunItem.getFireRate();
+		float recoil = gunItem.getRecoil(stack);
+
+		String dmg = SMathHelper.roundNumberStr(rangeDamage);
+		String rate = SMathHelper.roundNumberStr(fireRate);
+		String rec = SMathHelper.roundNumberStr(Math.round(recoil));
+
+		tooltip.add(Text.literal(dmg + " ")
 				.append(Text.translatable(String.format("desc.%s.item.machine_gun.range_damage", MODID))).formatted(Formatting.DARK_GREEN));
 
+		tooltip.add(Text.literal("1/" + rate + "ms ")
+				.append(Text.translatable(String.format("desc.%s.item.machine_gun.fire_rate", MODID))).formatted(Formatting.DARK_GREEN));
+
+		tooltip.add(Text.literal(rec + "° ")
+				.append(Text.translatable(String.format("desc.%s.item.machine_gun.recoil", MODID))).formatted(Formatting.DARK_GREEN));
+
 	}
+
+
 
 	public static ItemStack getItemFromPlayer(PlayerEntity player, Item item) {
 		Inventory inventory = player.getInventory();

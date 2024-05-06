@@ -1,0 +1,48 @@
+{
+  "parent": "bren:adventure/machine_gun",
+  "criteria": {
+    "killed_villager": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:villager"
+            }
+          }
+        ],
+        "killing_blow": {
+          "tags": [
+            {
+              "expected": true,
+              "id": "bren:is_bullet"
+            }
+          ]
+        }
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.bren.adventure.warcrimes.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "bren:bullet"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.bren.adventure.warcrimes.title"
+    }
+  },
+  "requirements": [
+    [
+      "killed_villager"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

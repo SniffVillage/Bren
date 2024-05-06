@@ -10,12 +10,20 @@ import com.google.gson.JsonPrimitive;
 
 public class ConfigHelper {
     public static abstract class Value<T> {
+        private final String comment;
         private T value;
         private final T defaultValue;
+
+        private Value(T defaultValue, String comment) {
+            this.defaultValue = defaultValue;
+            this.value = defaultValue;
+            this.comment = comment;
+        }
 
         private Value(T defaultValue) {
             this.defaultValue = defaultValue;
             this.value = defaultValue;
+            this.comment = "Not provided.";
         }
 
         public T get() {
@@ -34,13 +42,15 @@ public class ConfigHelper {
             return this.defaultValue;
         }
 
+        public String getComment() {return this.comment;}
+
         public abstract T read(JsonElement jsonElement);
         public abstract JsonElement write();
     }
 
     public static class BooleanValue extends Value<Boolean> {
-        public BooleanValue(Boolean defaultValue) {
-            super(defaultValue);
+        public BooleanValue(Boolean defaultValue, String comment) {
+            super(defaultValue, comment);
         }
 
         @Override
@@ -55,13 +65,29 @@ public class ConfigHelper {
     }
 
     public static class IntValue extends Value<Integer> {
-        public IntValue(Integer defaultValue) {
-            super(defaultValue);
+        public IntValue(Integer defaultValue, String comment) {
+            super(defaultValue, comment);
         }
 
         @Override
         public Integer read(JsonElement jsonElement) {
             return jsonElement.isJsonPrimitive() ? jsonElement.getAsJsonPrimitive().getAsInt() : this.getDefault();
+        }
+
+        @Override
+        public JsonElement write() {
+            return new JsonPrimitive(this.get());
+        }
+    }
+
+    public static class FloatValue extends Value<Float> {
+        public FloatValue(Float defaultValue, String comment) {
+            super(defaultValue, comment);
+        }
+
+        @Override
+        public Float read(JsonElement jsonElement) {
+            return jsonElement.isJsonPrimitive() ? jsonElement.getAsJsonPrimitive().getAsFloat() : this.getDefault();
         }
 
         @Override

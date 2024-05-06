@@ -22,16 +22,24 @@ public class MConfig {
 
 
     @Entry(clientOnly = true)
-    public static final ConfigHelper.BooleanValue renderGunOnBack = new ConfigHelper.BooleanValue(true);
+    public static final ConfigHelper.BooleanValue renderGunOnBack = new ConfigHelper.BooleanValue(true,
+            "Renders the gun on backs");
 
     @Entry(clientOnly = true)
-    public static final ConfigHelper.BooleanValue spawnCasingParticles = new ConfigHelper.BooleanValue(true);
+    public static final ConfigHelper.BooleanValue spawnCasingParticles = new ConfigHelper.BooleanValue(true,
+            "Spawns empty casings when a gun is fired");
 
     @Entry(clientOnly = true)
-    public static final ConfigHelper.BooleanValue showAmmoGui = new ConfigHelper.BooleanValue(true);
+    public static final ConfigHelper.BooleanValue showAmmoGui = new ConfigHelper.BooleanValue(true,
+            "Shows the ammo GUI");
 
     @Entry()
-    public static final ConfigHelper.BooleanValue bulletsBreakGlass = new ConfigHelper.BooleanValue(true);
+    public static final ConfigHelper.BooleanValue bulletsBreakGlass = new ConfigHelper.BooleanValue(true,
+            "Breaks glass on bullet impact");
+
+    @Entry()
+    public static final ConfigHelper.FloatValue recoilMultiplier = new ConfigHelper.FloatValue(1.0f,
+            "The recoil multiplier, so 0 is no recoil");
 
     public static void init() {
         if (!file.exists()) {
@@ -49,7 +57,7 @@ public class MConfig {
 
         try (FileWriter fileWriter = new FileWriter(file)) {
             JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("_comment", "Config for the Bren mod");
+            jsonObject.addProperty("name", "Config for the Bren mod");
 
             for (Field field : MConfig.class.getDeclaredFields()) {
                 if (!field.isAnnotationPresent(Entry.class)) {
@@ -61,6 +69,8 @@ public class MConfig {
                 if (!(object instanceof ConfigHelper.Value<?> configValue)) {
                     continue;
                 }
+
+                jsonObject.addProperty(String.format("_comment_%s", field.getName()), configValue.getComment());
 
                 jsonObject.add(field.getName(), configValue.write());
             }
