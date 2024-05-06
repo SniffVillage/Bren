@@ -144,7 +144,7 @@ public class Bren implements ModInitializer {
 		tooltip.add(Text.literal(dmg + " ")
 				.append(Text.translatable(String.format("desc.%s.item.machine_gun.range_damage", MODID))).formatted(Formatting.DARK_GREEN));
 
-		tooltip.add(Text.literal("1/" + rate + "ms ")
+		tooltip.add(Text.literal(rate + "t ")
 				.append(Text.translatable(String.format("desc.%s.item.machine_gun.fire_rate", MODID))).formatted(Formatting.DARK_GREEN));
 
 		tooltip.add(Text.literal(rec + "° ")
