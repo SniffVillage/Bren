@@ -7,7 +7,8 @@
       "conditions": {
         "firearm": {
           "items": [
-            "bren:machine_gun"
+            "bren:machine_gun",
+            "bren:netherite_machine_gun"
           ]
         }
       }
@@ -23,7 +24,7 @@
     "description": {
       "translate": "advancements.bren.adventure.long_shooting_machine_gun.description"
     },
-    "frame": "task",
+    "frame": "challenge",
     "show_toast": true,
     "announce_to_chat": true
   },
@@ -31,5 +32,9 @@
     [
       "shooting"
     ]
-  ]
+  ],
+  "rewards": {
+    "experience": 30
+  },
+  "sends_telemetry_event": true
 }
