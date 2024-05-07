@@ -16,18 +16,11 @@ public class RecoilSys {
     private static float recoil = 0;
     private static float cameraRecoilProgress = 0;
 
-    private static void shotEvent(PlayerEntity player, ItemStack stack) {
-        cameraRecoil = ((GunItem)stack.getItem()).getRecoil(stack);
+    public static void shotEvent(PlayerEntity player, float cam_recoil) {
+        cameraRecoil = cam_recoil;
         sideRecoil = (player.getRandom().nextFloat() - .5F) / 2;
         cameraRecoilProgress = 1;
         recoil = 0;
-    }
-
-    public static void regEvents() {
-        MEvents.GUN_FIRED_EVENT.register((player, stack) -> {
-            if (!player.getWorld().isClient()) { return;}
-            shotEvent(player, stack);
-        });
     }
 
     public static void tick(MinecraftClient client) {

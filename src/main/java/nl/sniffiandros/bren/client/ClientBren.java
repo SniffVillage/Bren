@@ -52,6 +52,7 @@ public class ClientBren implements ClientModInitializer {
         NetworkReg.shootPacket();
         NetworkReg.clientShootPacket();
         NetworkReg.shootAnimationPacket();
+        NetworkReg.recoilPacket();
         EntityRendererRegistry.register(Bren.BULLET, BulletRenderer::new);
         KeyBindingReg.reg();
         ModModelPredicateProvider.regModels();
@@ -85,8 +86,6 @@ public class ClientBren implements ClientModInitializer {
             if (r instanceof PlayerEntityRenderer && MConfig.renderGunOnBack.get()) {
                 e.register(new MachineGunBackFeatureRenderer(r, c.getItemRenderer()));
             }});
-
-        RecoilSys.regEvents();
 
         ClientTickEvents.END_CLIENT_TICK.register(WeaponTickHolder::tick);
         ClientTickEvents.END_CLIENT_TICK.register(WeaponTickHolder::tick);

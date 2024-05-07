@@ -46,7 +46,7 @@ public class LongShootingCriterion extends AbstractCriterion<LongShootingCriteri
 
 
         public boolean test(PlayerEntity player, ItemStack stack) {
-            return ((IGunUser)player).shootingDuration() > 70 && player.getActiveItem() == stack && this.firearm.test(stack);
+            return ((IGunUser)player).shootingDuration() > 80 && player.getActiveItem() == stack && this.firearm.test(stack);
         }
     }
 

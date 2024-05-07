@@ -77,6 +77,16 @@ public class GunUtils {
                 GunUtils.spawnBullet(user, origin, front, stack, new Vec2f(x,y), false, gunItem.bulletLifespan());
             }
         }
+
+
+
+        if (user instanceof PlayerEntity player) {
+            PacketByteBuf buf = PacketByteBufs.create();
+            buf.writeFloat(((GunItem) stack.getItem()).getRecoil(stack));
+
+            NetworkUtils.sendDataToClient(player, NetworkReg.RECOIL_CLIENT_PACKET_ID, buf);
+        }
+
         gunItem.useBullet(stack);
         return fireRate;
     }

@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import nl.sniffiandros.bren.client.renderer.RecoilSys;
 import nl.sniffiandros.bren.client.renderer.WeaponTickHolder;
 import nl.sniffiandros.bren.common.Bren;
 import nl.sniffiandros.bren.common.config.MConfig;
@@ -22,6 +23,7 @@ import nl.sniffiandros.bren.common.utils.GunUtils;
 public class NetworkReg {
     public static final Identifier SHOOT_PACKET_ID = new Identifier(Bren.MODID, "shoot");
     public static final Identifier SHOOT_CLIENT_PACKET_ID = new Identifier(Bren.MODID, "shoot_client");
+    public static final Identifier RECOIL_CLIENT_PACKET_ID = new Identifier(Bren.MODID, "recoil_client");
     public static final Identifier SHOOT_ANIMATION_PACKET_ID = new Identifier(Bren.MODID, "shoot_animation");
     public static final Identifier RELOAD_PACKET_ID = new Identifier(Bren.MODID, "reload");
 
@@ -31,6 +33,17 @@ public class NetworkReg {
 
             client.execute(() -> {
                 WeaponTickHolder.setTicks(16);
+            });
+        });
+    }
+
+    public static void recoilPacket() {
+        ClientPlayNetworking.registerGlobalReceiver(NetworkReg.RECOIL_CLIENT_PACKET_ID, (client, handler, buf, responseSender) -> {
+            float recoil = buf.readFloat();
+
+            client.execute(() -> {
+                if (client.player ==  null) {return;}
+                RecoilSys.shotEvent(client.player, recoil);
             });
         });
     }
