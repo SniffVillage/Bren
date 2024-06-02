@@ -17,15 +17,15 @@ import net.minecraft.item.DyeableItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import nl.sniffiandros.bren.client.features.MachineGunBackFeatureRenderer;
-import nl.sniffiandros.bren.client.renderer.RecoilSys;
+import nl.sniffiandros.bren.client.particle.AirRingParticle;
+import nl.sniffiandros.bren.client.particle.CasingParticle;
+import nl.sniffiandros.bren.client.particle.MuzzleSmokeParticle;
+import nl.sniffiandros.bren.client.registry.ClientNetworkReg;
 import nl.sniffiandros.bren.client.renderer.WeaponTickHolder;
 import nl.sniffiandros.bren.client.renderer.BulletRenderer;
 import nl.sniffiandros.bren.common.Bren;
 import nl.sniffiandros.bren.common.config.MConfig;
 import nl.sniffiandros.bren.common.entity.BulletEntity;
-import nl.sniffiandros.bren.common.particle.AirRingParticle;
-import nl.sniffiandros.bren.common.particle.MuzzleSmokeParticle;
-import nl.sniffiandros.bren.common.particle.CasingParticle;
 import nl.sniffiandros.bren.common.registry.*;
 import nl.sniffiandros.bren.common.registry.custom.GunWithMagItem;
 import nl.sniffiandros.bren.common.utils.ModModelPredicateProvider;
@@ -49,10 +49,10 @@ public class ClientBren implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(BlockReg.WORKBENCH, RenderLayer.getCutout());
 
 
-        NetworkReg.shootPacket();
-        NetworkReg.clientShootPacket();
-        NetworkReg.shootAnimationPacket();
-        NetworkReg.recoilPacket();
+        ClientNetworkReg.shootPacket();
+        ClientNetworkReg.clientShootPacket();
+        ClientNetworkReg.shootAnimationPacket();
+        ClientNetworkReg.recoilPacket();
         EntityRendererRegistry.register(Bren.BULLET, BulletRenderer::new);
         KeyBindingReg.reg();
         ModModelPredicateProvider.regModels();
