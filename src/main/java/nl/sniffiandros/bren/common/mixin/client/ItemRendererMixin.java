@@ -1,7 +1,6 @@
 package nl.sniffiandros.bren.common.mixin.client;
 
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.item.ItemModels;
 import net.minecraft.client.render.item.ItemRenderer;
@@ -17,7 +16,6 @@ import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
 import net.minecraft.world.World;
-import nl.sniffiandros.bren.client.ClientBren;
 import nl.sniffiandros.bren.client.renderer.WeaponTickHolder;
 import nl.sniffiandros.bren.common.Bren;
 import nl.sniffiandros.bren.common.entity.IGunUser;

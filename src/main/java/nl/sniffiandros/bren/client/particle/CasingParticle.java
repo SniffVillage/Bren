@@ -1,4 +1,4 @@
-package nl.sniffiandros.bren.common.particle;
+package nl.sniffiandros.bren.client.particle;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -6,7 +6,6 @@ import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import nl.sniffiandros.bren.common.registry.SoundReg;
 
 public class CasingParticle extends AscendingParticle {
