@@ -3,10 +3,12 @@
   "item.bren.auto_gun": "Auto-Gun",
   "item.bren.rifle": "Rifle",
   "item.bren.shotgun": "Shotgun",
+  "item.bren.revolver": "Revolver",
   "item.bren.netherite_machine_gun": "Netherite Machine Gun",
   "item.bren.netherite_auto_gun": "Netherite Auto-Gun",
   "item.bren.netherite_rifle": "Netherite Rifle",
   "item.bren.netherite_shotgun": "Netherite Shotgun",
+  "item.bren.netherite_revolver": "Netherite Revolver",
 
   "item.bren.magazine": "Magazine",
   "item.bren.short_magazine": "Short Magazine",
@@ -20,12 +22,14 @@
   "enchantment.bren.overflow": "Overflow",
   "enchantment.bren.autofill": "Autofill",
   "enchantment.bren.steady_hands": "Steady Hands",
+  "enchantment.bren.fire_lance": "Fire Lance",
 
-  "desc.bren.item.machine_gun.content": "Rounds",
-  "desc.bren.item.machine_gun.range_damage": "Range Damage",
-  "desc.bren.item.machine_gun.fire_rate": "Fire Rate",
-  "desc.bren.item.machine_gun.recoil": "Recoil",
+  "desc.bren.item.gun_with_mag.content": "Rounds",
   "desc.bren.item.magazine.content": "Ammo",
+
+  "attribute.name.ranged_damage": "Ranged Damage",
+  "attribute.name.fire_rate": "Fire Rate",
+  "attribute.name.recoil": "Recoil",
 
   "block.bren.workbench": "Workbench",
 
@@ -33,13 +37,16 @@
 
   "bren.item.shoot_silenced": "Silenced gunfire",
   "bren.item.shoot": "Gunfire",
-  "bren.item.machine_gun.distant_shoot": "Distant gunfire",
-  "bren.item.machine_gun.magazine_insert": "Magazine inserted",
-  "bren.item.machine_gun.magazine_remove": "Magazine removed",
+  "bren.item.distant_gunfire": "Distant gunfire",
+  "bren.item.magazine_insert": "Magazine inserted",
+  "bren.item.magazine_remove": "Magazine removed",
   "bren.item.shell_insert": "Shell inserted",
   "bren.item.rack": "Shotgun racked",
   "bren.particle.casing.bounce": "Casing bouncing",
   "bren.entity.villager.work_gunsmith": "Gunsmith works",
+  "bren.item.revolver.bullet_insert": "Bullet inserted",
+  "bren.item.revolver.reload": "Cylinder clicks",
+  "bren.item.revolver.spinning": "Revolver spinning",
 
   "death.attack.bullet": "%1$s was gunned down by %2$s!",
 
@@ -58,9 +65,14 @@
   "advancements.bren.adventure.shotgun.description": "Obtain an Shotgun",
   "advancements.bren.adventure.shotgun.title": "BAM!!!",
 
+  "advancements.bren.adventure.revolver.description": "Obtain an Revolver",
+  "advancements.bren.adventure.revolver.title": "Little Jimmy",
+
   "advancements.bren.adventure.warcrimes.description": "Kill a villager with a gun",
   "advancements.bren.adventure.warcrimes.title": "War crimes",
 
   "advancements.bren.adventure.long_shooting_machine_gun.description": "Shoot a Machine Gun for a couple of seconds",
-  "advancements.bren.adventure.long_shooting_machine_gun.title": "AHHHHH AH HA HA HA HA HA!!"
+  "advancements.bren.adventure.long_shooting_machine_gun.title": "AHHHHH AH HA HA HA HA HA!!",
+
+  "key.bren.reload": "Reload Gun"
 }

@@ -1,0 +1,39 @@
+{
+  "parent": "bren:adventure/auto_loader_contraption",
+  "criteria": {
+    "revolver": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "bren:revolver",
+              "bren:netherite_revolver"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.bren.adventure.revolver.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "bren:revolver"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.bren.adventure.revolver.title"
+    }
+  },
+  "requirements": [
+    [
+      "revolver"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

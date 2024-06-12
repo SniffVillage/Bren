@@ -45,7 +45,7 @@ public abstract class BipedEntityModelMixin<T extends LivingEntity> extends Anim
 
         ItemStack s = livingEntity.getMainHandStack();
         if (s != null) {
-            if (s.getItem() instanceof GunItem && livingEntity instanceof PlayerEntity player) {
+            if (s.getItem() instanceof GunItem gunItem && livingEntity instanceof PlayerEntity player) {
 
                 ItemCooldownManager cooldownManager = player.getItemCooldownManager();
 
@@ -53,8 +53,14 @@ public abstract class BipedEntityModelMixin<T extends LivingEntity> extends Anim
 
                 float c = cooldownManager.getCooldownProgress(mainHandItem.getItem(),delta);
 
-                GunEntityModelAnimator.angles(livingEntity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch,
-                        this.leftArm, this.rightArm, this.getHead(), c);
+                switch (gunItem.holdingPose()) {
+                    case TWO_ARMS -> GunEntityModelAnimator.angles(livingEntity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch,
+                            this.leftArm, this.rightArm, this.getHead(), c);
+                    case ONE_ARM ->  GunEntityModelAnimator.oneArm(livingEntity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch,
+                            this.leftArm, this.rightArm, this.getHead(), c);
+                    case REVOLVER -> GunEntityModelAnimator.revolver(livingEntity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch,
+                            this.leftArm, this.rightArm, this.getHead(), c);
+                }
 
                 this.hat.copyTransform(this.getHead());
                 this.animateArms(livingEntity, ageInTicks);

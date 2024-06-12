@@ -1,7 +1,10 @@
 package nl.sniffiandros.bren.common.registry.custom;
 
+import net.minecraft.client.render.model.json.ModelTransformationMode;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.ItemCooldownManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -9,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.util.math.RotationAxis;
 import net.minecraft.world.World;
 import nl.sniffiandros.bren.common.Bren;
 import nl.sniffiandros.bren.common.entity.IGunUser;
@@ -17,17 +21,30 @@ import nl.sniffiandros.bren.common.registry.ItemReg;
 import nl.sniffiandros.bren.common.registry.SoundReg;
 import nl.sniffiandros.bren.common.utils.GunHelper;
 
-public class ShotgunItem extends GunItem{
+public class ShotgunItem extends BulletOnlyGun {
+
     public ShotgunItem(Settings settings, ToolMaterial material, GunProperties gunProperties) {
         super(settings, material, gunProperties);
     }
 
     @Override
-    public int getContents(ItemStack stack) {
-        if (stack.getNbt() != null) {
-            return stack.getNbt().getInt("Contents");
-        }
-        return 0;
+    protected void onInsert(ItemStack stack, PlayerEntity player) {
+        player.getWorld().playSound(null,
+                player.getX(),
+                player.getY(),
+                player.getZ(),
+                SoundReg.ITEM_SHOTGUN_SHELL_INSERT,
+                SoundCategory.PLAYERS, 1.0F, 1.0F - (player.getRandom().nextFloat() - 0.5F) / 4);
+    }
+
+    @Override
+    protected void onFullyLoaded(ItemStack stack, PlayerEntity player) {
+        player.getWorld().playSound(null,
+                player.getX(),
+                player.getY(),
+                player.getZ(),
+                SoundReg.ITEM_SHOTGUN_RACK,
+                SoundCategory.PLAYERS, 1.0F, 1.0F - (player.getRandom().nextFloat() - 0.5F) / 4);
     }
 
     @Override
@@ -35,84 +52,27 @@ public class ShotgunItem extends GunItem{
         return 8 * Math.round(Math.max(1, EnchantmentHelper.getLevel(EnchantmentReg.OVERFLOW, stack)/2));
     }
 
-    public void addShell(ItemStack stack) {
-        if (stack.getItem() instanceof ShotgunItem) {
-            stack.getOrCreateNbt().putInt("Contents", getContents(stack) + 1);
-        }
-    }
-
     @Override
-    public void useBullet(ItemStack stack) {
-        if (stack.getItem() instanceof ShotgunItem) {
-            stack.getOrCreateNbt().putInt("Contents", getContents(stack) - 1);
-        }
-    }
+    public boolean applyCustomMatrix(LivingEntity entity, GunHelper.GunStates state, MatrixStack matrixStack, ItemStack stack, float cooldownProgress, ModelTransformationMode renderMode, boolean leftHanded) {
 
-    @Override
-    public void onReload(PlayerEntity player) {
-        ItemStack stack = player.getMainHandStack();
-        ItemCooldownManager cooldownManager = player.getItemCooldownManager();
+        if (state == GunHelper.GunStates.NORMAL && renderMode.isFirstPerson()) {
 
+            float f = -Math.min(cooldownProgress - .5F, 0) * 2;
+            float f1 = -Math.min(cooldownProgress - .3333333333333333F, 0) * 3;
 
+            float sin1 = (float) Math.abs(Math.sin(f * Math.PI));
+            float sin2 = (float) Math.abs(Math.sin(f1 * Math.PI));
 
-        if (stack.getItem() instanceof ShotgunItem) {
-
-            if (player instanceof IGunUser gunUser && !cooldownManager.isCoolingDown(stack.getItem())) {
-
-                ItemStack bullets = Bren.getItemFromPlayer(player, ItemReg.SHELL);
-
-                if (!gunUser.canReload() || bullets.isEmpty() || getContents(stack) >= getMaxCapacity(stack)) {
-                    return;
-                }
-                gunUser.setCanReload(false);
-                gunUser.setGunState(GunHelper.GunStates.RELOADING);
-                cooldownManager.set(stack.getItem(), 10);
-
-                player.getWorld().playSound(null,
-                        player.getX(),
-                        player.getY(),
-                        player.getZ(),
-                        SoundReg.ITEM_SHOTGUN_SHELL_INSERT,
-                        SoundCategory.PLAYERS, 3.0F, 1.0F - (player.getRandom().nextFloat() - 0.5F) / 4);
-            }
-        }
-    }
-
-    @Override
-    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
-
-        if (entity instanceof IGunUser gunUser && entity instanceof PlayerEntity player) {
-            ItemCooldownManager cooldownManager = player.getItemCooldownManager();
-            if (selected) {
-
-                if (gunUser.getGunState().equals(GunHelper.GunStates.RELOADING)) {
-                    if (!cooldownManager.isCoolingDown(stack.getItem())) {
-
-                        ItemStack bullets = Bren.getItemFromPlayer(player, ItemReg.SHELL);
-
-                        bullets.decrement(1);
-                        addShell(stack);
-
-                        gunUser.setGunState(GunHelper.GunStates.NORMAL);
-                        gunUser.setCanReload(true);
-                    } else if (cooldownManager.getCooldownProgress(stack.getItem(), 1) == 0 && getContents(stack) == getMaxCapacity(stack) - 1) {
-                        player.getWorld().playSound(null,
-                                player.getX(),
-                                player.getY(),
-                                player.getZ(),
-                                SoundReg.ITEM_SHOTGUN_RACK,
-                                SoundCategory.PLAYERS, 3.0F, 1.0F - (player.getRandom().nextFloat() - 0.5F) / 4);
-                    }
-                }
-            }
+            matrixStack.translate(0, sin1 * .3 - sin2 * .7, -0.2F * sin1);
+            matrixStack.multiply(RotationAxis.POSITIVE_X.rotation(sin1 * 1.047198F));
         }
 
-        super.inventoryTick(stack, world, entity, slot, selected);
+        return false;
     }
 
     @Override
     public int bulletLifespan() {
-        return 7;
+        return 9;
     }
 
     @Override
@@ -124,4 +84,7 @@ public class ShotgunItem extends GunItem{
     public int bulletAmount() {
         return 5;
     }
+
+    @Override
+    public Item compatibleBullet() {return ItemReg.SHELL;}
 }

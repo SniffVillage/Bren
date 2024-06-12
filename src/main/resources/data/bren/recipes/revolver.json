@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "M": {
+      "item": "bren:auto_loader_contraption"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "T": {
+      "item": "bren:metal_tube"
+    },
+    "P": {
+      "tag": "minecraft:logs"
+    }
+  },
+  "pattern": [
+    "T  ",
+    "II ",
+    "IMP"
+  ],
+  "result": {
+    "item": "bren:revolver"
+  },
+  "show_notification": true
+}

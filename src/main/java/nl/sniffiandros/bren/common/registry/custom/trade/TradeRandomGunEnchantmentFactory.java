@@ -25,7 +25,8 @@ public class TradeRandomGunEnchantmentFactory implements TradeOffers.Factory {
             EnchantmentReg.AUTOFILL,
             EnchantmentReg.OVERFLOW,
             EnchantmentReg.SILENCED,
-            EnchantmentReg.STEADY_HANDS
+            EnchantmentReg.STEADY_HANDS,
+            EnchantmentReg.FIRE_LANCE
     ).stream().collect(ImmutableSet.toImmutableSet());
 
     private final int price;
@@ -35,8 +36,6 @@ public class TradeRandomGunEnchantmentFactory implements TradeOffers.Factory {
         this.price = price;
         this.exp = exp;
     }
-
-
 
     @Nullable
     @Override

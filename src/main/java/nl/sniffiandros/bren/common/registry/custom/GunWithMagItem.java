@@ -213,8 +213,8 @@ public class GunWithMagItem extends GunItem{
                                     player.getX(),
                                     player.getY(),
                                     player.getZ(),
-                                    SoundReg.ITEM_MACHINE_GUN_MAGAZINE_REMOVE,
-                                    SoundCategory.PLAYERS, 3.0F, 1.0F - (player.getRandom().nextFloat() - 0.5F) / 4);
+                                    SoundReg.ITEM_MAGAZINE_REMOVE,
+                                    SoundCategory.PLAYERS, 1.0F, 1.0F - (player.getRandom().nextFloat() - 0.5F) / 4);
 
                         } else {
                             ItemStack mag = Bren.getMagazineFromPlayer(player, ((GunWithMagItem) stack.getItem()).compatibleMagazines());
@@ -228,8 +228,8 @@ public class GunWithMagItem extends GunItem{
                                 player.getX(),
                                 player.getY(),
                                 player.getZ(),
-                                SoundReg.ITEM_MACHINE_GUN_MAGAZINE_INSERT,
-                                SoundCategory.PLAYERS, 3.0F, 1.0F - (player.getRandom().nextFloat() - 0.5F) / 4);
+                                SoundReg.ITEM_MAGAZINE_INSERT,
+                                SoundCategory.PLAYERS, 1.0F, 1.0F - (player.getRandom().nextFloat() - 0.5F) / 4);
                     }
 
                 }

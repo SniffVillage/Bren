@@ -13,7 +13,7 @@ import nl.sniffiandros.bren.common.registry.NetworkReg;
 
 public class NetworkUtils {
 
-    public static void sendShotEffect(PlayerEntity player, Vec3d origin, Vec3d direction) {
+    public static void sendShotEffect(PlayerEntity player, Vec3d origin, Vec3d direction, boolean ejectCasing) {
         PacketByteBuf buf = PacketByteBufs.create();
 
         buf.writeFloat((float) origin.x);
@@ -23,6 +23,8 @@ public class NetworkUtils {
         buf.writeFloat((float) direction.x);
         buf.writeFloat((float) direction.y);
         buf.writeFloat((float) direction.z);
+
+        buf.writeBoolean(ejectCasing);
 
         sendDataToClient(player, NetworkReg.SHOOT_PACKET_ID, buf);
     }

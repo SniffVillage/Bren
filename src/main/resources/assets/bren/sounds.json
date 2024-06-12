@@ -36,6 +36,37 @@
       "bren:shotgun_rack"
     ]
   },
+  "item.revolver.shoot": {
+    "subtitle": "bren.item.shoot",
+    "sounds": [
+      "bren:revolver_shot_0",
+      "bren:revolver_shot_1"
+    ]
+  },
+  "item.revolver.bullet_insert": {
+    "subtitle": "bren.item.revolver.bullet_insert",
+    "sounds": [
+      "bren:bullet_insert_0",
+      "bren:bullet_insert_1",
+      "bren:bullet_insert_2"
+    ]
+  },
+  "item.revolver.reload": {
+    "subtitle": "bren.item.revolver.reload",
+    "sounds": [
+      "bren:revolver_reload_0",
+      "bren:revolver_reload_1"
+    ]
+  },
+  "item.revolver.spinning": {
+    "subtitle": "bren.item.revolver.spinning",
+    "sounds": [
+      "bren:spin_0",
+      "bren:spin_1",
+      "bren:spin_2",
+      "bren:spin_3"
+    ]
+  },
   "item.machine_gun.shoot_silenced": {
     "subtitle": "bren.item.shoot_silenced",
     "sounds": [
@@ -54,23 +85,23 @@
       "bren:silenced_rifle_shot"
     ]
   },
-  "item.machine_gun.distant_shoot": {
-    "subtitle": "bren.item.machine_gun.distant_shoot",
+  "item.distant_gunfire": {
+    "subtitle": "bren.item.distant_gunfire",
     "sounds": [
-      "bren:distant_machine_gun_shot_0",
-      "bren:distant_machine_gun_shot_1"
+      "bren:distant_gunfire_0",
+      "bren:distant_gunfire_1"
     ]
   },
-  "item.machine_gun.magazine_insert": {
-    "subtitle": "bren.item.machine_gun.magazine_insert",
+  "item.magazine_insert": {
+    "subtitle": "bren.item.magazine_insert",
     "sounds": [
-      "bren:machine_gun_magazine_insert"
+      "bren:magazine_insert"
     ]
   },
-  "item.machine_gun.magazine_remove": {
-    "subtitle": "bren.item.machine_gun.magazine_remove",
+  "item.magazine_remove": {
+    "subtitle": "bren.item.magazine_remove",
     "sounds": [
-      "bren:machine_gun_magazine_remove"
+      "bren:magazine_remove"
     ]
   },
   "entity.villager.work_gunsmith": {

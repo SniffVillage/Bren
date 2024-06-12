@@ -46,9 +46,9 @@ public class VillagerRegistry {
                 1, 1, states);
     }
 
-    public static void registerVillagers() {}
-// new SellPotionHoldingItemFactory(Items.ARROW, 5, Items.TIPPED_ARROW, 5, 2, 12, 30)
-    public static void registerTrades() {
+    public static void reg() {}
+
+    public static void regTrades() {
         TradeOfferHelper.registerVillagerOffers(GUNSMITH,1,
                 factories -> {
                     factories.add(((entity, random) -> {

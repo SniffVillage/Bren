@@ -41,18 +41,16 @@ import nl.sniffiandros.bren.common.registry.ParticleReg;
 import java.util.Iterator;
 
 public class BulletEntity extends ProjectileEntity {
-    private static final TrackedData<Integer> LIFESPAN = DataTracker.registerData(BulletEntity.class, TrackedDataHandlerRegistry.INTEGER);;
+    private static final TrackedData<Integer> LIFESPAN = DataTracker.registerData(BulletEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private float damage;
-    private boolean onFire;
 
     public BulletEntity(EntityType<? extends BulletEntity> entityType, World world) {
         super(entityType, world);
     }
 
-    public BulletEntity(World world, float damage, int lifespan, LivingEntity owner, boolean onFire) {
+    public BulletEntity(World world, float damage, int lifespan, LivingEntity owner) {
         super(Bren.BULLET, world);
         this.damage = damage;
-        this.onFire = onFire;
         this.setLifespan(lifespan);
         this.setNoGravity(true);
         this.setOwner(owner);
@@ -147,7 +145,7 @@ public class BulletEntity extends ProjectileEntity {
             DamageSource damageSource = DamageTypeReg.shot(this.getWorld(), this, this.getOwner());
             livingEntity.damage(damageSource, this.damage);
 
-            if (this.onFire) {
+            if (this.isOnFire()) {
                 entity.setOnFireFor(4);
             }
         }
@@ -171,6 +169,9 @@ public class BulletEntity extends ProjectileEntity {
             } else {
                 this.getWorld().playSound(null,vec3d.x,vec3d.y,vec3d.z,state.getSoundGroup().getBreakSound(), SoundCategory.BLOCKS, 1.0F, 3.0F);
 
+                boolean isAirAbove = this.getWorld().getBlockState(pos.up()).isAir();
+                boolean hitGround = !this.getWorld().getBlockState(pos).isAir();
+
                 if (this.getWorld().isClient()) {
                     for (int i = 0; i < 4; ++i) {
 
@@ -180,6 +181,8 @@ public class BulletEntity extends ProjectileEntity {
 
                         this.getWorld().addParticle(new BlockStateParticleEffect(ParticleTypes.BLOCK, state), vec3d.x,vec3d.y,vec3d.z, x, y, z);
                     }
+                } else if (hitGround && isAirAbove && this.isOnFire()){
+                    this.getWorld().setBlockState(pos.up(), Blocks.FIRE.getDefaultState());
                 }
 
                 this.discard();

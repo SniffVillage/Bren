@@ -26,7 +26,8 @@ public class TradeRandomGunFactory implements TradeOffers.Factory {
             ItemReg.MACHINE_GUN,
             ItemReg.AUTO_GUN,
             ItemReg.RIFLE,
-            ItemReg.SHOTGUN
+            ItemReg.SHOTGUN,
+            ItemReg.REVOLVER
     ).stream().collect(ImmutableSet.toImmutableSet());
 
     private final int price;
@@ -36,8 +37,6 @@ public class TradeRandomGunFactory implements TradeOffers.Factory {
         this.price = price;
         this.exp = exp;
     }
-
-
 
     @Nullable
     @Override

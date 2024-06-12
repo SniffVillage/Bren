@@ -13,9 +13,11 @@ import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import nl.sniffiandros.bren.common.Bren;
+import nl.sniffiandros.bren.common.config.MConfig;
 import nl.sniffiandros.bren.common.entity.BulletEntity;
 import nl.sniffiandros.bren.common.entity.IGunUser;
 import nl.sniffiandros.bren.common.network.NetworkUtils;
+import nl.sniffiandros.bren.common.registry.AttributeReg;
 import nl.sniffiandros.bren.common.registry.EnchantmentReg;
 import nl.sniffiandros.bren.common.registry.ItemReg;
 import nl.sniffiandros.bren.common.registry.NetworkReg;
@@ -34,9 +36,9 @@ public class GunUtils {
         World world = user.getWorld();
         ItemStack stack = user.getMainHandStack();
 
-        if (!(stack.getItem() instanceof GunItem gunItem)) { return 0;}
+        if (!(stack.getItem() instanceof GunItem gunItem)) return 0;
 
-        if (!((IGunUser)user).getGunState().equals(GunHelper.GunStates.NORMAL)) { return 0;}
+        if (!((IGunUser)user).getGunState().equals(GunHelper.GunStates.NORMAL)) return 0;
 
 
         boolean silenced = EnchantmentHelper.getLevel(EnchantmentReg.SILENCED, stack) >= 1;
@@ -52,7 +54,7 @@ public class GunUtils {
             GunUtils.playDistantGunFire(world, user.getPos());
         }
 
-        int fireRate = gunItem.getFireRate();
+        int fireRate = (int)Math.round(user.getAttributeValue(AttributeReg.FIRE_RATE));
 
         if (!world.isClient()) {
 
@@ -67,14 +69,16 @@ public class GunUtils {
             Vec3d side = position.get(3);
 
             for (PlayerEntity p : user.getWorld().getPlayers()) {
-                NetworkUtils.sendShotEffect(p, origin.add(side.add(down).multiply(0.15)), front);
+                NetworkUtils.sendShotEffect(p, origin.add(side.add(down).multiply(0.15)), front, gunItem.ejectCasing());
             }
+
+            int level = EnchantmentHelper.getLevel(EnchantmentReg.FIRE_LANCE, stack);
 
             for (int i = 0; i < gunItem.bulletAmount(); ++i) {
                 float x = (user.getRandom().nextFloat() - .5f) * 2 * gunItem.spread();
                 float y = (user.getRandom().nextFloat() - .5f) * 2 * gunItem.spread();
 
-                GunUtils.spawnBullet(user, origin, front, stack, new Vec2f(x,y), false, gunItem.bulletLifespan());
+                GunUtils.spawnBullet(user, origin, front, stack, new Vec2f(x,y), level * 6, gunItem.bulletSpeed(), gunItem.bulletLifespan());
             }
         }
 
@@ -82,7 +86,11 @@ public class GunUtils {
 
         if (user instanceof PlayerEntity player) {
             PacketByteBuf buf = PacketByteBufs.create();
-            buf.writeFloat(((GunItem) stack.getItem()).getRecoil(stack));
+
+            double recoil = user.getAttributeValue(AttributeReg.RECOIL);
+            recoil *= MConfig.recoilMultiplier.get();
+            recoil /= ((EnchantmentHelper.getLevel(EnchantmentReg.STEADY_HANDS, stack) * 2.6d * 0.1d) + 1);
+            buf.writeFloat((float)recoil);
 
             NetworkUtils.sendDataToClient(player, NetworkReg.RECOIL_CLIENT_PACKET_ID, buf);
         }
@@ -109,19 +117,22 @@ public class GunUtils {
     }
 
     public static void spawnBullet(LivingEntity entity, Vec3d origin, Vec3d front, ItemStack stack, Vec2f spread,
-                                   boolean fireBullet, int lifespan) {
+                                   int ticksOnFire, float speed, int lifespan) {
 
         World world = entity.getWorld();
 
-        BulletEntity bullet = new BulletEntity(world, GunItem.rangeDamage(stack), lifespan, entity, fireBullet);
+        float rangedDamage = (float)entity.getAttributeValue(AttributeReg.RANGED_DAMAGE);
 
-        Vec3d bulletPos = origin.subtract(new Vec3d(0,0.2,0)).subtract(front.multiply(3.8));
+        BulletEntity bullet = new BulletEntity(world, rangedDamage, lifespan, entity);
+
+        Vec3d bulletPos = origin.subtract(new Vec3d(0,0.2,0)).subtract(front.multiply(speed));
 
         bullet.setPos(bulletPos.getX(), bulletPos.getY() - 0.1, bulletPos.getZ());
-        bullet.setVelocity(entity, entity.getPitch() + spread.y, entity.getHeadYaw() + spread.x, 0.0F, 3.5F, 0.0F);
+        bullet.setVelocity(entity, entity.getPitch() + spread.y, entity.getHeadYaw() + spread.x, 0.0F, speed, 0.0F);
 
         bullet.velocityModified = true;
         bullet.velocityDirty = true;
+        bullet.setFireTicks(ticksOnFire);
 
         world.spawnEntity(bullet);
     }

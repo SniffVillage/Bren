@@ -21,6 +21,7 @@ import nl.sniffiandros.bren.client.ClientBren;
 import nl.sniffiandros.bren.client.renderer.WeaponTickHolder;
 import nl.sniffiandros.bren.common.Bren;
 import nl.sniffiandros.bren.common.entity.IGunUser;
+import nl.sniffiandros.bren.common.registry.AttributeReg;
 import nl.sniffiandros.bren.common.registry.custom.GunItem;
 import nl.sniffiandros.bren.common.registry.custom.GunWithMagItem;
 import nl.sniffiandros.bren.common.utils.GunHelper;
@@ -43,7 +44,10 @@ public class ItemRendererMixin {
     private BakedModel editGuiModel(BakedModel defaultModel, ItemStack stack, ModelTransformationMode renderMode) {
 
         if (renderMode == ModelTransformationMode.GUI || renderMode == ModelTransformationMode.FIXED || renderMode == ModelTransformationMode.GROUND) {
-            if (stack.getItem() instanceof GunItem) {
+            if (stack.getItem() instanceof GunItem gunItem) {
+                if (!gunItem.hasGUIModel()) {
+                    return defaultModel;
+                }
                 return bakeGuiModel(stack);
             }
 
@@ -76,7 +80,7 @@ public class ItemRendererMixin {
             MinecraftClient minecraftClient = MinecraftClient.getInstance();
             float delta = minecraftClient.getTickDelta();
 
-            if (item.getItem() instanceof GunItem) {
+            if (item.getItem() instanceof GunItem gunItem && entity.getOffHandStack() != item) {
 
                 if (entity instanceof IGunUser gunUser) {
 
@@ -88,31 +92,36 @@ public class ItemRendererMixin {
                         f1 = Math.max(f1 - 0.15F, 0);
                     }
 
+                    boolean customMatrix = gunItem.applyCustomMatrix(entity, gunUser.getGunState(), matrices, item, f1, renderMode, leftHanded);
 
-                    float f = 1 - WeaponTickHolder.getAnimationTicks(delta)/16;
-                    boolean reloading = gunUser.getGunState().equals(GunHelper.GunStates.RELOADING);
+                    if (!customMatrix) {
 
-                    float kick = !reloading ? Math.max(GunItem.rangeDamage(item), 6) / 6 : 1;
+                        float f = 1 - WeaponTickHolder.getAnimationTicks(delta) / 16;
+                        boolean reloading = gunUser.getGunState().equals(GunHelper.GunStates.RELOADING);
 
-                    if (renderMode.isFirstPerson()) {
+                        float rangedDamage = (float)entity.getAttributeValue(AttributeReg.RANGED_DAMAGE);
+                        float kick = !reloading ? Math.max(rangedDamage, 6) / 6 : 1;
 
-                        float sin = (float) Math.sin((f * 2 - 0.5) * Math.PI) * 0.5F + 0.5F;
-                        float sin2 = (float) Math.sin((f1 * 2 - 0.5) * Math.PI) * 0.5F + 0.5F;
-                        float sin3 = reloading ? sin2 : (float) Math.sin(1 - f);
+                        if (renderMode.isFirstPerson()) {
 
-                        double d = (Math.sin(((float) entity.age + delta) / 2) * (reloading ? sin2 : f1)) * 30;
+                            float sin = (float) Math.sin((f * 2 - 0.5) * Math.PI) * 0.5F + 0.5F;
+                            float sin2 = (float) Math.sin((f1 * 2 - 0.5) * Math.PI) * 0.5F + 0.5F;
+                            float sin3 = reloading ? sin2 : (float) Math.sin(1 - f);
 
-                        matrices.translate(0, 0, reloading ? 0 : sin / 2 + f1 / 4);
-                        matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees((float) (leftHanded ? -15 + d : 15 + d)));
-                        matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees((sin3 * 10) * kick));
+                            double d = (Math.sin(((float) entity.age + delta) / 2) * (reloading ? sin2 : f1)) * 30;
 
-                    } else {
-                        float z = Math.max((1 - f + f1) / 2, 0);
-                        float f2 = reloading ? ((float) Math.sin((f1 * 2 - 0.5) * Math.PI) * 0.5F + 0.5F) / 3 : z;
-                        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(leftHanded ? 10 : -10));
-                        matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(f2 * 30 + 45));
+                            matrices.translate(0, 0, reloading ? 0 : sin / 2 + f1 / 4);
+                            matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees((float) (leftHanded ? -15 + d : 15 + d)));
+                            matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees((sin3 * 10) * kick));
 
-                        matrices.translate(0, -f2 / 4 + 0.25F, f2 / 8 - 0.25F);
+                        } else {
+                            float z = Math.max((1 - f + f1) / 2, 0);
+                            float f2 = reloading ? ((float) Math.sin((f1 * 2 - 0.5) * Math.PI) * 0.5F + 0.5F) / 3 : z;
+                            matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(leftHanded ? 10 : -10));
+                            matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(f2 * 30 + 45));
+
+                            matrices.translate(0, -f2 / 4 + 0.25F, f2 / 8 - 0.25F);
+                        }
                     }
                 }
             }

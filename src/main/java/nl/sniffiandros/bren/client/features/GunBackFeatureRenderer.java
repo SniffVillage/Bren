@@ -15,11 +15,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.RotationAxis;
 import nl.sniffiandros.bren.common.entity.IGunUser;
 
-public class MachineGunBackFeatureRenderer <T extends LivingEntity, M extends BipedEntityModel<T>> extends FeatureRenderer<T, M> {
+public class GunBackFeatureRenderer<T extends LivingEntity, M extends BipedEntityModel<T>> extends FeatureRenderer<T, M> {
 
     private final ItemRenderer itemRenderer;
 
-    public MachineGunBackFeatureRenderer(FeatureRendererContext<T, M> context, ItemRenderer itemRenderer) {
+    public GunBackFeatureRenderer(FeatureRendererContext<T, M> context, ItemRenderer itemRenderer) {
         super(context);
         this.itemRenderer = itemRenderer;
     }

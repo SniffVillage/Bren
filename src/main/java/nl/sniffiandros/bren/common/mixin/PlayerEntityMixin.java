@@ -3,6 +3,7 @@ package nl.sniffiandros.bren.common.mixin;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -20,6 +21,7 @@ import net.minecraft.world.World;
 import nl.sniffiandros.bren.common.Bren;
 import nl.sniffiandros.bren.common.entity.IGunUser;
 import nl.sniffiandros.bren.common.events.MEvents;
+import nl.sniffiandros.bren.common.registry.AttributeReg;
 import nl.sniffiandros.bren.common.registry.custom.GunItem;
 import nl.sniffiandros.bren.common.utils.GunHelper;
 import nl.sniffiandros.bren.common.utils.GunUtils;
@@ -28,6 +30,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.function.Predicate;
 
@@ -91,6 +94,14 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IGunUser
         }
     }
 
+    @Inject(at = @At("TAIL"), method = "createPlayerAttributes", cancellable = true)
+    private static void createPlayerAttributes(CallbackInfoReturnable<DefaultAttributeContainer.Builder> cir) {
+        cir.setReturnValue(cir.getReturnValue()
+                .add(AttributeReg.RANGED_DAMAGE, 0d)
+                .add(AttributeReg.FIRE_RATE, 0d)
+                .add(AttributeReg.RECOIL, 0d));
+    }
+
     @Override
     public boolean canReload() {
         return this.canReload;
@@ -142,8 +153,10 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IGunUser
         ItemStack handItem = this.getMainHandStack();
 
         if (handItem != null) {
-            if (handItem.getItem() instanceof GunItem) {
-                this.lastEquippedGun = handItem;
+            if (handItem.getItem() instanceof GunItem gunItem) {
+                if (gunItem.renderOnBack()) {
+                    this.lastEquippedGun = handItem;
+                }
             }
 
 

@@ -24,7 +24,8 @@
       "bren:auto_gun",
       "bren:machine_gun",
       "bren:rifle",
-      "bren:shotgun"
+      "bren:shotgun",
+      "bren:revolver"
     ]
   },
   "sends_telemetry_event": false
