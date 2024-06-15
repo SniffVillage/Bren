@@ -26,7 +26,6 @@ import nl.sniffiandros.bren.common.registry.custom.MagazineItem;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 
 public class GunUtils {
@@ -88,8 +87,7 @@ public class GunUtils {
             PacketByteBuf buf = PacketByteBufs.create();
 
             double recoil = user.getAttributeValue(AttributeReg.RECOIL);
-            recoil *= MConfig.recoilMultiplier.get();
-            recoil /= ((EnchantmentHelper.getLevel(EnchantmentReg.STEADY_HANDS, stack) * 2.6d * 0.1d) + 1);
+            recoil = CalculateRecoil(stack, recoil);
             buf.writeFloat((float)recoil);
 
             NetworkUtils.sendDataToClient(player, NetworkReg.RECOIL_CLIENT_PACKET_ID, buf);
@@ -97,6 +95,12 @@ public class GunUtils {
 
         gunItem.useBullet(stack);
         return fireRate;
+    }
+
+    public static double CalculateRecoil(ItemStack stack, double baseRecoil) {
+        baseRecoil *= MConfig.recoilMultiplier.get();
+        baseRecoil /= ((EnchantmentHelper.getLevel(EnchantmentReg.STEADY_HANDS, stack) * 2.6d * 0.1d) + 1);
+        return Math.round(baseRecoil * 2) / 2.0;
     }
 
     public static List<Vec3d> calculatePositionBasedOnAngle(LivingEntity entity) {

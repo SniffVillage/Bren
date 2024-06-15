@@ -6,6 +6,7 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import nl.sniffiandros.bren.common.config.MConfig;
 import nl.sniffiandros.bren.common.registry.AttributeReg;
 import nl.sniffiandros.bren.common.registry.EnchantmentReg;
 import nl.sniffiandros.bren.common.registry.custom.GunItem;
@@ -41,6 +42,7 @@ public abstract class TooltipsMixin {
     private String modifyTooltipContents(DecimalFormat formatter, double value, @Local EntityAttributeModifier attribute, @Local @Nullable PlayerEntity player) {
         String insertion = "";
         UUID attributeID = attribute.getId();
+
         if (attributeID == AttributeReg.RANGED_DAMAGE_MODIFIER_ID) {
 
             if (item instanceof GunItem gunItem) {
@@ -62,13 +64,16 @@ public abstract class TooltipsMixin {
 
         } else if (attributeID == AttributeReg.RECOIL_MODIFIER_ID) {
             insertion = "°";
-            value *= 1 - Math.min(EnchantmentHelper.getLevel(EnchantmentReg.STEADY_HANDS, (ItemStack)(Object)this) * 0.2d, 1.0d);
+
+            value *= MConfig.recoilMultiplier.get();
+            value /= ((EnchantmentHelper.getLevel(EnchantmentReg.STEADY_HANDS, (ItemStack)(Object)this) * 2.6d * 0.1d) + 1);
 
             if (player != null) {
                 value += player.getAttributeBaseValue(AttributeReg.RECOIL);
             }
-
+            value = Math.round(value * 2) / 2.0;
         }
+
         return formatter.format(value) + insertion;
     }
 }
