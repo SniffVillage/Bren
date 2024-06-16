@@ -94,12 +94,13 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IGunUser
         }
     }
 
-    @Inject(at = @At("TAIL"), method = "createPlayerAttributes", cancellable = true)
+    @Inject(method = "createPlayerAttributes()Lnet/minecraft/entity/attribute/DefaultAttributeContainer$Builder;",
+            at = @At("RETURN"))
     private static void createPlayerAttributes(CallbackInfoReturnable<DefaultAttributeContainer.Builder> cir) {
-        cir.setReturnValue(cir.getReturnValue()
+        cir.getReturnValue()
                 .add(AttributeReg.RANGED_DAMAGE, 0d)
                 .add(AttributeReg.FIRE_RATE, 0d)
-                .add(AttributeReg.RECOIL, 0d));
+                .add(AttributeReg.RECOIL, 0d);
     }
 
     @Override
