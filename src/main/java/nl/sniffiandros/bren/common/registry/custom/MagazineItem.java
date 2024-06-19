@@ -48,7 +48,7 @@ public class MagazineItem extends Item {
 
     public static int getMaxCapacity(ItemStack stack) {
         if (stack.getItem() instanceof MagazineItem magazineItem) {
-            return magazineItem.capacity * Math.round(Math.max(1, EnchantmentHelper.getLevel(EnchantmentReg.OVERFLOW, stack)/2));
+            return Math.round(magazineItem.capacity * Math.max(1, 1 + (float) EnchantmentHelper.getLevel(EnchantmentReg.OVERFLOW, stack) / 4));
         }
         return 10;
     }

@@ -15,7 +15,7 @@ public class RecoilSys {
     public static void shotEvent(PlayerEntity player, float cam_recoil) {
         cameraRecoil = cam_recoil;
         sideRecoil = (player.getRandom().nextFloat() - .5F) / 2;
-        cameraRecoilProgress = 4;
+        cameraRecoilProgress = 2;
         recoil = 0;
     }
 
@@ -29,7 +29,7 @@ public class RecoilSys {
         float pitch = player.getPitch();
         float yaw = player.getYaw();
 
-        recoil = progress/4 * cameraRecoil * client.getLastFrameDuration();
+        recoil = progress * cameraRecoil * client.getLastFrameDuration();
 
         player.setPitch(pitch - (Float.isNaN(recoil) ? .0F : recoil));
         player.setYaw(yaw - (Float.isNaN(recoil * sideRecoil) ? .0F : recoil * sideRecoil));
