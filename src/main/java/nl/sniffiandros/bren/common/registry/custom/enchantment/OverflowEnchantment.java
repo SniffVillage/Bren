@@ -2,7 +2,7 @@ package nl.sniffiandros.bren.common.registry.custom.enchantment;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.ItemStack;
-import nl.sniffiandros.bren.common.registry.custom.ShotgunItem;
+import nl.sniffiandros.bren.common.registry.custom.types.ShotgunItem;
 
 public class OverflowEnchantment extends MagazineEnchantment {
     public OverflowEnchantment(Enchantment.Rarity weight) {

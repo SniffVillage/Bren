@@ -1,7 +1,8 @@
 package nl.sniffiandros.bren.common.mixin.client;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.item.ItemModels;
 import net.minecraft.client.render.item.ItemRenderer;
@@ -17,14 +18,12 @@ import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
 import net.minecraft.world.World;
-import nl.sniffiandros.bren.client.ClientBren;
 import nl.sniffiandros.bren.client.renderer.WeaponTickHolder;
 import nl.sniffiandros.bren.common.Bren;
 import nl.sniffiandros.bren.common.entity.IGunUser;
 import nl.sniffiandros.bren.common.registry.AttributeReg;
-import nl.sniffiandros.bren.common.registry.custom.GunItem;
-import nl.sniffiandros.bren.common.registry.custom.GunWithMagItem;
-import nl.sniffiandros.bren.common.utils.GunHelper;
+import nl.sniffiandros.bren.common.registry.custom.types.GunItem;
+import nl.sniffiandros.bren.common.registry.custom.types.GunWithMagItem;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -33,10 +32,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+@Environment(value= EnvType.CLIENT)
 @Mixin(ItemRenderer.class)
-public class ItemRendererMixin {
-
-    private static final Identifier CONTENT_TEXTURE = new Identifier(Bren.MODID, "test");
+public abstract class ItemRendererMixin {
 
     @Shadow @Final private ItemModels models;
 
@@ -50,9 +48,7 @@ public class ItemRendererMixin {
                 }
                 return bakeGuiModel(stack);
             }
-
         }
-
         return defaultModel;
     }
 
@@ -94,13 +90,13 @@ public class ItemRendererMixin {
 
                     boolean customMatrix = gunItem.applyCustomMatrix(entity, gunUser.getGunState(), matrices, item, f1, renderMode, leftHanded);
 
-                    if (!customMatrix) {
+                    if (!customMatrix && f1 <= 0.95F) {
 
-                        float f = 1 - WeaponTickHolder.getAnimationTicks(delta) / 16;
-                        boolean reloading = gunUser.getGunState().equals(GunHelper.GunStates.RELOADING);
+                        float f = 1 - WeaponTickHolder.getAnimationTicks(delta)/16;
+                        boolean reloading = WeaponTickHolder.getAnimationTicks(delta) == 0;
 
                         float rangedDamage = (float)entity.getAttributeValue(AttributeReg.RANGED_DAMAGE);
-                        float kick = !reloading ? Math.max(rangedDamage, 6) / 6 : 1;
+                        float kick = !reloading ? Math.max(rangedDamage, 4) / 4 : 1;
 
                         if (renderMode.isFirstPerson()) {
 

@@ -10,39 +10,40 @@ import net.minecraft.util.Identifier;
 import nl.sniffiandros.bren.common.Bren;
 import nl.sniffiandros.bren.common.config.MConfig;
 import nl.sniffiandros.bren.common.registry.custom.*;
+import nl.sniffiandros.bren.common.registry.custom.types.*;
 
 public class ItemReg {
 
     // Machine Gun
-    public static final float MACHINE_GUN_RECOIL = 15f;
+    public static final float MACHINE_GUN_RECOIL = 9f;
     public static final float MACHINE_GUN_DAMAGE = MConfig.machineGunDamage.get();
     public static final float N_MACHINE_GUN_DAMAGE = MConfig.netheriteMachineGunDamage.get();
 
     // Auto-Gun
-    public static final float AUTO_GUN_RECOIL = 10f;
+    public static final float AUTO_GUN_RECOIL = 12f;
     public static final float AUTO_GUN_DAMAGE = MConfig.autoGunDamage.get();
     public static final float N_AUTO_GUN_DAMAGE = MConfig.netheriteAutoGunDamage.get();
 
     // Rifle
-    public static final float RIFLE_RECOIL = 30f;
+    public static final float RIFLE_RECOIL = 22f;
     public static final float RIFLE_DAMAGE = MConfig.rifleDamage.get();
     public static final float N_RIFLE_DAMAGE = MConfig.netheriteRifleDamage.get();
 
     // Shotgun
-    public static final float SHOTGUN_RECOIL = 33f;
+    public static final float SHOTGUN_RECOIL = 25f;
     public static final float SHOTGUN_DAMAGE = MConfig.shotgunDamage.get();
     public static final float N_SHOTGUN_DAMAGE = MConfig.netheriteShotgunDamage.get();
 
     // Revolver
-    public static final float REVOLVER_RECOIL = 20f;
+    public static final float REVOLVER_RECOIL = 15f;
     public static final float REVOLVER_DAMAGE = MConfig.revolverDamage.get();
     public static final float N_REVOLVER_DAMAGE = MConfig.netheriteRevolverDamage.get();
 
-    public static final Item MACHINE_GUN = registerItem("machine_gun", new GunWithMagItem(
+    public static final Item MACHINE_GUN = registerItem("machine_gun", new MachineGunItem(
             new FabricItemSettings(), ToolMaterials.IRON, TagReg.MEDIUM_MAGAZINES, new GunProperties().rangedDamage(MACHINE_GUN_DAMAGE).fireRate(3).recoil(MACHINE_GUN_RECOIL)
             .shootSound(SoundReg.ITEM_MACHINE_GUN_SHOOT, SoundReg.ITEM_MACHINE_GUN_SHOOT_SILENCED)));
 
-    public static final Item NETHERITE_MACHINE_GUN = registerItem("netherite_machine_gun", new GunWithMagItem(
+    public static final Item NETHERITE_MACHINE_GUN = registerItem("netherite_machine_gun", new MachineGunItem(
             new FabricItemSettings().fireproof(), ToolMaterials.NETHERITE, TagReg.MEDIUM_MAGAZINES, new GunProperties().rangedDamage(N_MACHINE_GUN_DAMAGE).fireRate(3).recoil(MACHINE_GUN_RECOIL)
             .shootSound(SoundReg.ITEM_MACHINE_GUN_SHOOT, SoundReg.ITEM_MACHINE_GUN_SHOOT_SILENCED)));
 

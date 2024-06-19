@@ -17,6 +17,7 @@ import net.minecraft.item.DyeableItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import nl.sniffiandros.bren.client.features.GunBackFeatureRenderer;
+import nl.sniffiandros.bren.client.renderer.RecoilSys;
 import nl.sniffiandros.bren.client.renderer.WeaponTickHolder;
 import nl.sniffiandros.bren.client.renderer.BulletRenderer;
 import nl.sniffiandros.bren.common.Bren;
@@ -26,7 +27,7 @@ import nl.sniffiandros.bren.client.particle.AirRingParticle;
 import nl.sniffiandros.bren.client.particle.MuzzleSmokeParticle;
 import nl.sniffiandros.bren.client.particle.CasingParticle;
 import nl.sniffiandros.bren.common.registry.*;
-import nl.sniffiandros.bren.common.registry.custom.GunWithMagItem;
+import nl.sniffiandros.bren.common.registry.custom.types.GunWithMagItem;
 import nl.sniffiandros.bren.common.utils.ModModelPredicateProvider;
 import org.joml.Matrix4f;
 
@@ -86,8 +87,8 @@ public class ClientBren implements ClientModInitializer {
                 e.register(new GunBackFeatureRenderer(r, c.getItemRenderer()));
             }});
 
-        ClientTickEvents.END_CLIENT_TICK.register(WeaponTickHolder::tick);
-        ClientTickEvents.END_CLIENT_TICK.register(WeaponTickHolder::tick);
+        ClientTickEvents.START_CLIENT_TICK.register(WeaponTickHolder::tick);
+        ClientTickEvents.START_CLIENT_TICK.register(RecoilSys::tick);
     }
 
     public static List<ModelIdentifier> registerGUIModels(Identifier id, List<ModelIdentifier> modelIdentifierList, boolean clothed, boolean hasMagazine) {

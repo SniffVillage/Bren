@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 
 public interface IGunUser {
 
-    void setShooting(boolean b);
+    void setReloadingGun(ItemStack reloadingGun);
 
     boolean isShooting();
 

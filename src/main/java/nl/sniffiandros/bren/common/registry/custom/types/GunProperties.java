@@ -1,4 +1,4 @@
-package nl.sniffiandros.bren.common.registry.custom;
+package nl.sniffiandros.bren.common.registry.custom.types;
 
 import net.minecraft.sound.SoundEvent;
 

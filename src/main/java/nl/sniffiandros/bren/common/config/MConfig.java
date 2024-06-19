@@ -66,11 +66,11 @@ public class MConfig {
             "Ranged damage for the Netherite Rifle");
 
     @Entry()
-    public static final ConfigHelper.FloatValue shotgunDamage = new ConfigHelper.FloatValue(3.75f,
+    public static final ConfigHelper.FloatValue shotgunDamage = new ConfigHelper.FloatValue(4f,
             "Damage per shrapnel for the Shotgun");
 
     @Entry()
-    public static final ConfigHelper.FloatValue netheriteShotgunDamage = new ConfigHelper.FloatValue(4f,
+    public static final ConfigHelper.FloatValue netheriteShotgunDamage = new ConfigHelper.FloatValue(4.5f,
             "Damage per shrapnel for the Netherite Shotgun");
 
     @Entry()

@@ -3,14 +3,10 @@ package nl.sniffiandros.bren.client;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.ItemCooldownManager;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.Arm;
 import nl.sniffiandros.bren.common.entity.IGunUser;
-import nl.sniffiandros.bren.common.registry.custom.GunItem;
 import nl.sniffiandros.bren.common.utils.GunHelper;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 public class GunEntityModelAnimator {
     public static void oneArm(LivingEntity livingEntity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch,

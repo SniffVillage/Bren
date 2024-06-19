@@ -21,7 +21,7 @@ import nl.sniffiandros.bren.common.registry.AttributeReg;
 import nl.sniffiandros.bren.common.registry.EnchantmentReg;
 import nl.sniffiandros.bren.common.registry.ItemReg;
 import nl.sniffiandros.bren.common.registry.NetworkReg;
-import nl.sniffiandros.bren.common.registry.custom.GunItem;
+import nl.sniffiandros.bren.common.registry.custom.types.GunItem;
 import nl.sniffiandros.bren.common.registry.custom.MagazineItem;
 
 import java.util.ArrayList;
@@ -34,11 +34,11 @@ public class GunUtils {
 
         World world = user.getWorld();
         ItemStack stack = user.getMainHandStack();
+        IGunUser gunUser = (IGunUser)user;
 
         if (!(stack.getItem() instanceof GunItem gunItem)) return 0;
 
-        if (!((IGunUser)user).getGunState().equals(GunHelper.GunStates.NORMAL)) return 0;
-
+        if (!gunUser.getGunState().equals(GunHelper.GunStates.NORMAL)) return 0;
 
         boolean silenced = EnchantmentHelper.getLevel(EnchantmentReg.SILENCED, stack) >= 1;
 
@@ -87,7 +87,7 @@ public class GunUtils {
             PacketByteBuf buf = PacketByteBufs.create();
 
             double recoil = user.getAttributeValue(AttributeReg.RECOIL);
-            recoil = CalculateRecoil(stack, recoil);
+            recoil = CalculateRecoil(player, stack, recoil);
             buf.writeFloat((float)recoil);
 
             NetworkUtils.sendDataToClient(player, NetworkReg.RECOIL_CLIENT_PACKET_ID, buf);
@@ -97,9 +97,10 @@ public class GunUtils {
         return fireRate;
     }
 
-    public static double CalculateRecoil(ItemStack stack, double baseRecoil) {
+    public static double CalculateRecoil(PlayerEntity player, ItemStack stack, double baseRecoil) {
         baseRecoil *= MConfig.recoilMultiplier.get();
         baseRecoil /= ((EnchantmentHelper.getLevel(EnchantmentReg.STEADY_HANDS, stack) * 2.6d * 0.1d) + 1);
+        baseRecoil = EnchantmentHelper.getLevel(EnchantmentReg.MOUNTED, stack) == 1 && player.isSneaking() ? baseRecoil / 2 : baseRecoil;
         return Math.round(baseRecoil * 2) / 2.0;
     }
 
@@ -167,6 +168,7 @@ public class GunUtils {
             }
         });
     }
+
 
     public static void fillMagazine(ItemStack mag, PlayerEntity player) {
         while (mag.getItem() instanceof MagazineItem) {

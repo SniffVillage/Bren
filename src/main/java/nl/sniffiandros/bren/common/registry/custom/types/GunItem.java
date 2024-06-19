@@ -1,12 +1,10 @@
-package nl.sniffiandros.bren.common.registry.custom;
+package nl.sniffiandros.bren.common.registry.custom.types;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.client.item.TooltipData;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
@@ -22,28 +20,29 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import nl.sniffiandros.bren.common.Bren;
-import nl.sniffiandros.bren.common.config.MConfig;
 import nl.sniffiandros.bren.common.entity.IGunUser;
 import nl.sniffiandros.bren.common.registry.AttributeReg;
-import nl.sniffiandros.bren.common.registry.EnchantmentReg;
 import nl.sniffiandros.bren.common.registry.ParticleReg;
+import nl.sniffiandros.bren.common.registry.custom.PoseType;
 import nl.sniffiandros.bren.common.utils.GunHelper;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Optional;
 
 public class GunItem extends ToolItem implements Vanishable {
     private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
     private final SoundEvent shootSound;
     private final SoundEvent silentShootSound;
     private final float bulletSpeed;
+    private final float recoil;
 
     public GunItem(Settings settings, ToolMaterial material, GunProperties gunProperties) {
         super(material, settings.maxDamageIfAbsent((int) (material.getDurability() * 1.5)));
         this.shootSound = gunProperties.sound;
         this.silentShootSound = gunProperties.silentSound;
         this.bulletSpeed = gunProperties.speed;
+
+        this.recoil = gunProperties.recoil;
 
         ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(AttributeReg.RANGED_DAMAGE, new EntityAttributeModifier(AttributeReg.RANGED_DAMAGE_MODIFIER_ID, "Weapon modifier",
@@ -58,6 +57,9 @@ public class GunItem extends ToolItem implements Vanishable {
         this.attributeModifiers = builder.build();
     }
 
+    public float getRecoil() {
+        return this.recoil;
+    }
 
     public boolean applyCustomMatrix(LivingEntity entity, GunHelper.GunStates state, MatrixStack matrixStack, ItemStack stack, float cooldownProgress, ModelTransformationMode renderMode, boolean leftHanded) {return false;}
 
@@ -99,6 +101,8 @@ public class GunItem extends ToolItem implements Vanishable {
     }
 
     public void onReload(PlayerEntity player) {}
+
+    public void reloadTick(ItemStack stack, World world, PlayerEntity player, IGunUser gunUser) {}
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
@@ -166,4 +170,6 @@ public class GunItem extends ToolItem implements Vanishable {
     public float bulletSpeed() {
         return this.bulletSpeed;
     }
+
+    public int reloadSpeed() {return 20;}
 }

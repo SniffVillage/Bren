@@ -5,6 +5,8 @@ import net.minecraft.util.math.MathHelper;
 
 public class WeaponTickHolder {
 
+    // May use it for something else
+
     private static int ticks;
     private static int last_ticks;
 

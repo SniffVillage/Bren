@@ -34,7 +34,6 @@ public class StructureRegistry {
         addBuildingToPool(templatePoolRegistry, processorListRegistry, savannaPoolLocation, Bren.MODID + ":village/savanna/houses/savanna_gun_store_0", 5);
         addBuildingToPool(templatePoolRegistry, processorListRegistry, snowyPoolLocation, Bren.MODID + ":village/snowy/houses/snowy_gun_store_0", 5);
         addBuildingToPool(templatePoolRegistry, processorListRegistry, taigaPoolLocation, Bren.MODID + ":village/taiga/houses/taiga_gun_store_0", 5);
-
     }
 
     public static void addBuildingToPool(Registry<StructurePool> templatePoolRegistry, Registry<StructureProcessorList> processorListRegistry, Identifier poolRL, String nbtPieceRL, int weight) {

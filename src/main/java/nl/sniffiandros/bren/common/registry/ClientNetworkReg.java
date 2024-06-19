@@ -8,9 +8,7 @@ import net.minecraft.world.World;
 import nl.sniffiandros.bren.client.renderer.RecoilSys;
 import nl.sniffiandros.bren.client.renderer.WeaponTickHolder;
 import nl.sniffiandros.bren.common.config.MConfig;
-import nl.sniffiandros.bren.common.registry.NetworkReg;
-import nl.sniffiandros.bren.common.registry.SoundReg;
-import nl.sniffiandros.bren.common.registry.custom.GunItem;
+import nl.sniffiandros.bren.common.registry.custom.types.GunItem;
 
 public class ClientNetworkReg {
     public static void shootAnimationPacket() {

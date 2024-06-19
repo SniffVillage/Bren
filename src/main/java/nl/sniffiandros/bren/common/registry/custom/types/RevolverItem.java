@@ -1,4 +1,4 @@
-package nl.sniffiandros.bren.common.registry.custom;
+package nl.sniffiandros.bren.common.registry.custom.types;
 
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
@@ -7,7 +7,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.ItemCooldownManager;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.sound.SoundCategory;
@@ -15,8 +14,8 @@ import net.minecraft.util.math.RotationAxis;
 import net.minecraft.world.World;
 import nl.sniffiandros.bren.common.entity.IGunUser;
 import nl.sniffiandros.bren.common.registry.EnchantmentReg;
-import nl.sniffiandros.bren.common.registry.ItemReg;
 import nl.sniffiandros.bren.common.registry.SoundReg;
+import nl.sniffiandros.bren.common.registry.custom.PoseType;
 import nl.sniffiandros.bren.common.utils.GunHelper;
 
 public class RevolverItem extends BulletOnlyGun {

@@ -1,10 +1,8 @@
 package nl.sniffiandros.bren.common;
 
-import com.mojang.datafixers.types.templates.Tag;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.advancement.criterion.Criteria;
@@ -14,24 +12,17 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.*;
-import net.minecraft.recipe.SpecialRecipeSerializer;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.tag.TagKey;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import nl.sniffiandros.bren.common.config.MConfig;
 import nl.sniffiandros.bren.common.entity.BulletEntity;
 import nl.sniffiandros.bren.common.registry.*;
-import nl.sniffiandros.bren.common.registry.custom.GunItem;
 import nl.sniffiandros.bren.common.registry.custom.MagazineItem;
 import nl.sniffiandros.bren.common.registry.custom.criterion.LongShootingCriterion;
-import nl.sniffiandros.bren.common.utils.SMathHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.List;
 
 public class Bren implements ModInitializer {
 	public static final String MODID = "bren";
