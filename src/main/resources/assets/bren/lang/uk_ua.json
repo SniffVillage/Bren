@@ -1,0 +1,79 @@
+{
+  "item.bren.machine_gun": "Кулемет",
+  "item.bren.auto_gun": "Автомат",
+  "item.bren.rifle": "Гвинтівка",
+  "item.bren.shotgun": "Дробовик",
+  "item.bren.revolver": "Револьвер",
+  "item.bren.netherite_machine_gun": "Незеритовий кулемет",
+  "item.bren.netherite_auto_gun": "Незеритовий автомат",
+  "item.bren.netherite_rifle": "Незеритова гвинтівка",
+  "item.bren.netherite_shotgun": "Незеритовий дробовик",
+  "item.bren.netherite_revolver": "Незеритовий револьвер",
+
+  "item.bren.magazine": "Магазин",
+  "item.bren.short_magazine": "Короткий магазин",
+  "item.bren.clothed_magazine": "Магазин із тканиною",
+  "item.bren.bullet": "Куля",
+  "item.bren.shell": "Гільза",
+  "item.bren.metal_tube": "Металева трубка",
+  "item.bren.auto_loader_contraption": "Пристрій для автозавантаження",
+
+  "enchantment.bren.silenced": "Приглушення",
+  "enchantment.bren.overflow": "Переповнення",
+  "enchantment.bren.autofill": "Автозаповнення",
+  "enchantment.bren.steady_hands": "Стійкі руки",
+  "enchantment.bren.fire_lance": "Вогняний спис",
+  "enchantment.bren.mounted": "Приборканість",
+
+  "desc.bren.item.gun_with_mag.content": "Раунди",
+  "desc.bren.item.magazine.content": "Набої",
+
+  "attribute.name.ranged_damage": "Дальньої шкоди",
+  "attribute.name.fire_rate": "Темп вогню",
+  "attribute.name.recoil": "Віддача",
+
+  "block.bren.workbench": "Стіл стрільця",
+
+  "entity.minecraft.villager.gunsmith": "Стрілець",
+
+  "bren.item.shoot_silenced": "Тихий постріл",
+  "bren.item.shoot": "Постріл",
+  "bren.item.distant_gunfire": "Далекий постріл",
+  "bren.item.magazine_insert": "Магазин установлюється",
+  "bren.item.magazine_remove": "Магазин знімається",
+  "bren.item.shell_insert": "Гільза встановляється",
+  "bren.item.rack": "Дробовик повішено",
+  "bren.particle.casing.bounce": "Підстрибування корпусу",
+  "bren.entity.villager.work_gunsmith": "Стрілець працює",
+  "bren.item.revolver.bullet_insert": "Куля вставляється",
+  "bren.item.revolver.reload": "Циліндр клацає",
+  "bren.item.revolver.spinning": "Револьвер крутиться",
+
+  "death.attack.bullet": "%2$s убив пострілом %1$s!",
+
+  "advancements.bren.adventure.auto_loader_contraption.description": "Отримайте пристрій для автозавантаження",
+  "advancements.bren.adventure.auto_loader_contraption.title": "Оввааа... ?!",
+
+  "advancements.bren.adventure.machine_gun.description": "Отримайте кулемет",
+  "advancements.bren.adventure.machine_gun.title": "ТРА-ТА-ТА-ТА-ТА!!",
+
+  "advancements.bren.adventure.auto_gun.description": "Отримайте автомат",
+  "advancements.bren.adventure.auto_gun.title": "АК-4... забудь",
+
+  "advancements.bren.adventure.rifle.description": "Отримайте гвинтівку",
+  "advancements.bren.adventure.rifle.title": "Побачимось за 5 хвилин..",
+
+  "advancements.bren.adventure.shotgun.description": "Отримайте дробовик",
+  "advancements.bren.adventure.shotgun.title": "БАМ!!!",
+
+  "advancements.bren.adventure.revolver.description": "Отримайте револьвер",
+  "advancements.bren.adventure.revolver.title": "Маленький Джиммі",
+
+  "advancements.bren.adventure.warcrimes.description": "Убийте селянина зброєю",
+  "advancements.bren.adventure.warcrimes.title": "Злочин",
+
+  "advancements.bren.adventure.long_shooting_machine_gun.description": "Стріляйте кулеметом кілька секунд",
+  "advancements.bren.adventure.long_shooting_machine_gun.title": "АХХХХХ АХ-ХА-ХА-ХА-ХА-ХА!!",
+
+  "key.bren.reload": "Перезарядити зброю"
+}
