@@ -15,6 +15,7 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.mob.EndermanEntity;
 import net.minecraft.entity.passive.ParrotEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -135,6 +136,38 @@ public class BulletEntity extends ProjectileEntity {
     protected void onEntityHit(EntityHitResult entityHitResult) {
         super.onEntityHit(entityHitResult);
         Entity entity = entityHitResult.getEntity();
+
+        // This is to make Enderman teleport away instead of letting themselves be hit by bullets, this is to simulate their behavior when a projectile such as arrows or snowballs tries to hit them
+        if (entity instanceof EndermanEntity enderman) {
+            for (int i = 0; i < 100; i++) {
+                double randomX = enderman.getX() + (Math.random() - 0.5) * 16;
+                double randomY = enderman.getY() + (Math.random() - 0.5) * 8;
+                double randomZ = enderman.getZ() + (Math.random() - 0.5) * 16;
+
+                BlockPos targetPos = new BlockPos((int) randomX, (int) randomY, (int) randomZ);
+                BlockState blockState = enderman.getWorld().getBlockState(targetPos);
+
+                if (blockState.isAir() && enderman.getWorld().getBlockState(targetPos.down()).isSolidBlock(enderman.getWorld(), targetPos.down())) {
+                    enderman.teleport(randomX, randomY + 1, randomZ);
+                    break;
+                }
+            }
+            return; // Prevent damage towards Enderman
+        }
+
+        // This is to fix bullets not being able to destroy End Crystals
+        if (entity.getType() == EntityType.END_CRYSTAL) {
+            DamageSource damageSource = DamageTypeReg.shot(this.getWorld(), this, this.getOwner());
+            entity.damage(damageSource, 1f); // Makes End Crystals explode when hit
+        }
+
+        // Fixes Ender Dragon not taking damage from bullets, using any other method doesn't seem to work
+        if (entity.getType() == EntityType.ENDER_DRAGON) {
+            DamageSource damageSource = DamageTypeReg.shot(this.getWorld(), this, this.getOwner());
+
+            entity.damage(damageSource, this.damage);
+            entity.damage(damageSource, this.damage * 0.5f); // Apply an additional damage instance because "livingEntity.timeUntilRegen = 0;" isn't compatible with "EntityType.ENDER_DRAGON"
+        }
 
         if (entity.equals(this.getOwner())) {
             return;
