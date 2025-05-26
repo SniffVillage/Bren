@@ -1,4 +1,5 @@
 package nl.sniffiandros.bren.common.registry.custom.enchantment;
+import nl.sniffiandros.bren.common.registry.custom.types.MachineGunItem;
 
 public class SteadyHandsEnchantment extends GunEnchantment {
     public SteadyHandsEnchantment(Rarity weight) {
@@ -19,5 +20,10 @@ public class SteadyHandsEnchantment extends GunEnchantment {
 
     public int getMaxLevel() {
         return 2;
+    }
+
+    @Override
+    public boolean isAcceptableItem(ItemStack stack) {
+         return super.isAcceptableItem(stack) && !(stack.getItem() instanceof MachineGunItem);
     }
 }
