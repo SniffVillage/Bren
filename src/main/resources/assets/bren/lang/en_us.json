@@ -25,6 +25,13 @@
   "enchantment.bren.fire_lance": "Fire Lance",
   "enchantment.bren.mounted": "Mounted",
 
+  "enchantment.bren.silenced.desc": "Reduces gunfire noise. Also removes the distant gunfire sound effect.",
+  "enchantment.bren.overflow.desc": "Increases the capacity of a magazine.",
+  "enchantment.bren.autofill.desc": "Passively refills the magazine using available ammo inside the player's inventory.",
+  "enchantment.bren.steady_hands.desc": "Reduces gun recoil.",
+  "enchantment.bren.fire_lance.desc": "Shotgun shrapnel burns for a short duration, igniting targets on impact.",
+  "enchantment.bren.mounted.desc": "Reduces Machine Gun recoil while sneaking.",
+
   "desc.bren.item.gun_with_mag.content": "Rounds",
   "desc.bren.item.magazine.content": "Ammo",
 
