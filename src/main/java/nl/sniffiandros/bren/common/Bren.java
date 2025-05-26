@@ -39,13 +39,14 @@ public class Bren implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		AttributeReg.reg();
-		ItemReg.reg();
 		BlockReg.reg();
 		SoundReg.reg();
 		ParticleReg.reg();
 		EnchantmentReg.reg();
 
 		MConfig.init();
+
+		ItemReg.reg(); // Has to be AFTER "MConfig.init();" in order for the damage inside the config file to also apply
 
 		ServerLifecycleEvents.SERVER_STARTING.register(StructureRegistry::registerJigsaws);
 
