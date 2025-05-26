@@ -161,7 +161,7 @@ public class BulletEntity extends ProjectileEntity {
             entity.damage(damageSource, 1f); // Makes End Crystals explode when hit
         }
 
-        // Fixes Ender Dragon not taking damage from bullets, using any other method doesn't seem to work
+        // Fixes Ender Dragon not taking damage from bullets
         if (entity.getType() == EntityType.ENDER_DRAGON) {
             DamageSource damageSource = DamageTypeReg.shot(this.getWorld(), this, this.getOwner());
 
