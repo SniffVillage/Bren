@@ -42,8 +42,8 @@ public class MConfig {
             "The recoil multiplier, so 0 is no recoil || Default: 1.0");
 
     @Entry()
-    public static final ConfigHelper.FloatValue machineGunDamage = new ConfigHelper.FloatValue(4.5f,
-            "Ranged damage for the Machine Gun || Default: 4.5");
+    public static final ConfigHelper.FloatValue machineGunDamage = new ConfigHelper.FloatValue(4.0f,
+            "Ranged damage for the Machine Gun || Default: 4.0");
 
     @Entry()
     public static final ConfigHelper.FloatValue netheriteMachineGunDamage = new ConfigHelper.FloatValue(5.0f,
@@ -66,20 +66,20 @@ public class MConfig {
             "Ranged damage for the Netherite Rifle || Default: 11.0");
 
     @Entry()
-    public static final ConfigHelper.FloatValue shotgunDamage = new ConfigHelper.FloatValue(4.0f,
-            "Damage per shrapnel for the Shotgun || Default: 4.0");
+    public static final ConfigHelper.FloatValue shotgunDamage = new ConfigHelper.FloatValue(3.5f,
+            "Damage per shrapnel for the Shotgun || Default: 3.5");
 
     @Entry()
-    public static final ConfigHelper.FloatValue netheriteShotgunDamage = new ConfigHelper.FloatValue(4.5f,
-            "Damage per shrapnel for the Netherite Shotgun || Default: 4.5");
+    public static final ConfigHelper.FloatValue netheriteShotgunDamage = new ConfigHelper.FloatValue(3.75f,
+            "Damage per shrapnel for the Netherite Shotgun || Default: 3.75");
 
     @Entry()
     public static final ConfigHelper.FloatValue revolverDamage = new ConfigHelper.FloatValue(8.0f,
             "Ranged damage for the Revolver || Default: 8.0");
 
     @Entry()
-    public static final ConfigHelper.FloatValue netheriteRevolverDamage = new ConfigHelper.FloatValue(8.5f,
-            "Ranged damage for the Netherite Revolver || Default: 8.5");
+    public static final ConfigHelper.FloatValue netheriteRevolverDamage = new ConfigHelper.FloatValue(9.0f,
+            "Ranged damage for the Netherite Revolver || Default: 9.0");
 
     public static void init() {
         if (!file.exists()) {
