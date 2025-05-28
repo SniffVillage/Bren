@@ -84,7 +84,6 @@ public class BulletEntity extends PersistentProjectileEntity {
 
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
-        super.onEntityHit(entityHitResult);
         Entity entity = entityHitResult.getEntity();
 
         if (entity instanceof EndermanEntity) {
