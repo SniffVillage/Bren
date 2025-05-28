@@ -23,7 +23,7 @@ public class MConfig {
 
     @Entry(clientOnly = true)
     public static final ConfigHelper.BooleanValue renderGunOnBack = new ConfigHelper.BooleanValue(true,
-            "Renders the gun on backs || Default: true";
+            "Renders the gun on backs || Default: true");
 
     @Entry(clientOnly = true)
     public static final ConfigHelper.BooleanValue spawnCasingParticles = new ConfigHelper.BooleanValue(true,

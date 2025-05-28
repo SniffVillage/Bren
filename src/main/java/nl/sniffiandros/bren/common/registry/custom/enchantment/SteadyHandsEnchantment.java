@@ -1,4 +1,6 @@
 package nl.sniffiandros.bren.common.registry.custom.enchantment;
+
+import net.minecraft.item.ItemStack;
 import nl.sniffiandros.bren.common.registry.custom.types.MachineGunItem;
 
 public class SteadyHandsEnchantment extends GunEnchantment {
