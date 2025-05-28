@@ -86,13 +86,13 @@ public class BulletEntity extends PersistentProjectileEntity {
     protected void onEntityHit(EntityHitResult entityHitResult) {
         Entity entity = entityHitResult.getEntity();
 
-        if (entity instanceof EndermanEntity) {
-            return; // Prevent damage towards Enderman
-        }
-
         if (entity.equals(this.getOwner())) return;
 
-        if (entity instanceof LivingEntity livingEntity) {
+        if (entity instanceof EndermanEntity) {
+            // Only run vanilla logic, so Endermen teleport and take normal projectile damage
+            super.onEntityHit(entityHitResult);
+        } else if (entity instanceof LivingEntity livingEntity) {
+            // Custom logic for all other LivingEntity
             livingEntity.timeUntilRegen = 0;
             DamageSource damageSource = DamageTypeReg.shot(this.getWorld(), this, this.getOwner());
             livingEntity.damage(damageSource, this.damage);
