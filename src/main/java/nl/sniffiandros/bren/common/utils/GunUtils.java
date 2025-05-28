@@ -130,7 +130,7 @@ public class GunUtils {
 
         BulletEntity bullet = new BulletEntity(world, rangedDamage, lifespan, entity);
 
-        Vec3d bulletPos = origin.subtract(new Vec3d(0,0.2,0));
+        Vec3d bulletPos = origin.subtract(new Vec3d(0,0.2,0)).subtract(front.multiply(speed));
 
         bullet.setPos(bulletPos.getX(), bulletPos.getY() - 0.1, bulletPos.getZ());
         bullet.setVelocity(entity, entity.getPitch() + spread.y, entity.getHeadYaw() + spread.x, 0.0F, speed, 0.0F);
