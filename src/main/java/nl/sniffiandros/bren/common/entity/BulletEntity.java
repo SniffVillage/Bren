@@ -143,7 +143,11 @@ public class BulletEntity extends ProjectileEntity {
             return;
         }
 
-        if (entity instanceof LivingEntity livingEntity) {
+        if (entity instanceof EndermanEntity enderman) {
+            DamageSource damageSource = DamageTypeReg.shot(this.getWorld(), this, this.getOwner());
+            enderman.damage(damageSource, this.damage);
+
+        } else if (entity instanceof LivingEntity livingEntity) {
             livingEntity.timeUntilRegen = 0;
             DamageSource damageSource = DamageTypeReg.shot(this.getWorld(), this, this.getOwner());
             livingEntity.damage(damageSource, this.damage);
