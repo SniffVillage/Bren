@@ -125,24 +125,6 @@ public class BulletEntity extends ProjectileEntity {
         super.onEntityHit(entityHitResult);
         Entity entity = entityHitResult.getEntity();
 
-        // This is to make Enderman teleport away instead of letting themselves be hit by bullets, this is to simulate their behavior when a projectile such as arrows or snowballs tries to hit them
-        if (entity instanceof EndermanEntity enderman) {
-            for (int i = 0; i < 100; i++) {
-                double randomX = enderman.getX() + (Math.random() - 0.5) * 16;
-                double randomY = enderman.getY() + (Math.random() - 0.5) * 8;
-                double randomZ = enderman.getZ() + (Math.random() - 0.5) * 16;
-
-                BlockPos targetPos = new BlockPos((int) randomX, (int) randomY, (int) randomZ);
-                BlockState blockState = enderman.getWorld().getBlockState(targetPos);
-
-                if (blockState.isAir() && enderman.getWorld().getBlockState(targetPos.down()).isSolidBlock(enderman.getWorld(), targetPos.down())) {
-                    enderman.teleport(randomX, randomY + 1, randomZ);
-                    break;
-                }
-            }
-            return; // Prevent damage towards Enderman
-        }
-
         // This is to fix bullets not being able to destroy End Crystals
         if (entity.getType() == EntityType.END_CRYSTAL) {
             DamageSource damageSource = DamageTypeReg.shot(this.getWorld(), this, this.getOwner());
