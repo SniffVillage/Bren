@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
- * Mixin to make all Enderman dodge custom BulletEntity projectiles globally.
+ * Mixin to make all Endermen dodge custom BulletEntity projectiles globally.
  **/
 @Mixin(EndermanEntity.class)
 public class EndermanEntityMixin {
