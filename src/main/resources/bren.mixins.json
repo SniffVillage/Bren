@@ -5,7 +5,9 @@
   "mixins": [
     "PlayerEntityMixin",
     "StructurePoolAccessor",
-    "TooltipsMixin"
+    "TooltipsMixin",
+    "EndermanEntityMixin",
+    "EndermanEntityAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

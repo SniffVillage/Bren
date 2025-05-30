@@ -1,7 +1,5 @@
 package nl.sniffiandros.bren.common.entity;
 
-import com.mojang.datafixers.types.templates.Tag;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBlockTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -14,19 +12,11 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.EndermanEntity;
-import net.minecraft.entity.passive.ParrotEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionUtil;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
@@ -38,8 +28,6 @@ import nl.sniffiandros.bren.common.Bren;
 import nl.sniffiandros.bren.common.config.MConfig;
 import nl.sniffiandros.bren.common.registry.DamageTypeReg;
 import nl.sniffiandros.bren.common.registry.ParticleReg;
-
-import java.util.Iterator;
 
 public class BulletEntity extends ProjectileEntity {
     private static final TrackedData<Integer> LIFESPAN = DataTracker.registerData(BulletEntity.class, TrackedDataHandlerRegistry.INTEGER);
@@ -137,24 +125,6 @@ public class BulletEntity extends ProjectileEntity {
         super.onEntityHit(entityHitResult);
         Entity entity = entityHitResult.getEntity();
 
-        // This is to make Enderman teleport away instead of letting themselves be hit by bullets, this is to simulate their behavior when a projectile such as arrows or snowballs tries to hit them
-        if (entity instanceof EndermanEntity enderman) {
-            for (int i = 0; i < 100; i++) {
-                double randomX = enderman.getX() + (Math.random() - 0.5) * 16;
-                double randomY = enderman.getY() + (Math.random() - 0.5) * 8;
-                double randomZ = enderman.getZ() + (Math.random() - 0.5) * 16;
-
-                BlockPos targetPos = new BlockPos((int) randomX, (int) randomY, (int) randomZ);
-                BlockState blockState = enderman.getWorld().getBlockState(targetPos);
-
-                if (blockState.isAir() && enderman.getWorld().getBlockState(targetPos.down()).isSolidBlock(enderman.getWorld(), targetPos.down())) {
-                    enderman.teleport(randomX, randomY + 1, randomZ);
-                    break;
-                }
-            }
-            return; // Prevent damage towards Enderman
-        }
-
         // This is to fix bullets not being able to destroy End Crystals
         if (entity.getType() == EntityType.END_CRYSTAL) {
             DamageSource damageSource = DamageTypeReg.shot(this.getWorld(), this, this.getOwner());
@@ -164,16 +134,18 @@ public class BulletEntity extends ProjectileEntity {
         // Fixes Ender Dragon not taking damage from bullets
         if (entity.getType() == EntityType.ENDER_DRAGON) {
             DamageSource damageSource = DamageTypeReg.shot(this.getWorld(), this, this.getOwner());
-
             entity.damage(damageSource, this.damage);
-            entity.damage(damageSource, this.damage * 0.5f); // Apply an additional damage instance because "livingEntity.timeUntilRegen = 0;" isn't compatible with "EntityType.ENDER_DRAGON"
         }
 
         if (entity.equals(this.getOwner())) {
             return;
         }
 
-        if (entity instanceof LivingEntity livingEntity) {
+        if (entity instanceof EndermanEntity enderman) {
+            DamageSource damageSource = DamageTypeReg.shot(this.getWorld(), this, this.getOwner());
+            enderman.damage(damageSource, this.damage);
+
+        } else if (entity instanceof LivingEntity livingEntity) {
             livingEntity.timeUntilRegen = 0;
             DamageSource damageSource = DamageTypeReg.shot(this.getWorld(), this, this.getOwner());
             livingEntity.damage(damageSource, this.damage);
