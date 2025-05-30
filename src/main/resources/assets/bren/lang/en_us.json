@@ -41,7 +41,7 @@
 
   "block.bren.workbench": "Workbench",
 
-  "entity.minecraft.villager.gunsmith": "Gunsmith",
+  "entity.minecraft.villager.bren.gunsmith": "Gunsmith",
 
   "bren.item.shoot_silenced": "Silenced gunfire",
   "bren.item.shoot": "Gunfire",
