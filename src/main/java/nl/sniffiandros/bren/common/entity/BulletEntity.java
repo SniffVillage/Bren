@@ -134,9 +134,7 @@ public class BulletEntity extends ProjectileEntity {
         // Fixes Ender Dragon not taking damage from bullets
         if (entity.getType() == EntityType.ENDER_DRAGON) {
             DamageSource damageSource = DamageTypeReg.shot(this.getWorld(), this, this.getOwner());
-
             entity.damage(damageSource, this.damage);
-            entity.damage(damageSource, this.damage * 0.5f); // Apply an additional damage instance because "livingEntity.timeUntilRegen = 0;" isn't compatible with "EntityType.ENDER_DRAGON"
         }
 
         if (entity.equals(this.getOwner())) {
