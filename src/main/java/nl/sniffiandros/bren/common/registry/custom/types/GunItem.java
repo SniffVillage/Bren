@@ -172,4 +172,9 @@ public class GunItem extends ToolItem implements Vanishable {
     }
 
     public int reloadSpeed() {return 20;}
+
+    @Override
+    public boolean isUsedOnRelease(ItemStack stack) {
+        return true;
+    }
 }
