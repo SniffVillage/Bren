@@ -83,13 +83,11 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IGunUser
         }
 
         if (this.getGunState().equals(GunHelper.GunStates.RELOADING) && this.getMainHandStack() != this.reloadingGun) {
-            cooldownManager.remove(this.reloadingGun.getItem());
             this.setGunState(GunHelper.GunStates.NORMAL);
             this.setCanReload(true);
         }
 
         if (this.getGunState().equals(GunHelper.GunStates.NORMAL) && !this.reloadingGun.isEmpty()) {
-            cooldownManager.remove(this.reloadingGun.getItem());
             this.reloadingGun = ItemStack.EMPTY;
         }
     }

@@ -178,8 +178,8 @@ public class GunUtils {
             if (MagazineItem.getContents(mag) >= MagazineItem.getMaxCapacity(mag)) {
                 break;
             } else {
-               int i = MagazineItem.fillMagazine(mag, bulletStack.getCount());
-               bulletStack.decrement(i);
+                int i = MagazineItem.fillMagazine(mag, bulletStack.getCount());
+                bulletStack.decrement(i);
             }
         }
     }
